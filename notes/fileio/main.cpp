@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
     //string tmpStr;
     //string words[100];
     string inputLine;
-    int numbers[10][10] = {0}; //one dimensional array
+    int numbers[10][10] = {0}; //two dimensional array
     int colCounter = 0;
     int rowCounter = 0;
 

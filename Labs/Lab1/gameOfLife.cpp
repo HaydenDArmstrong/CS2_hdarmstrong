@@ -20,8 +20,9 @@ Should create structs and populate the array
 */
 void initCells(Cell* board[][10], int boardSize)
 {
-
+    for (j=0; )
 }
+
 
 /*
 Function to read the board from a file
