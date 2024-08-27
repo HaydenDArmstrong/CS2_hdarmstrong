@@ -4,6 +4,18 @@
 
 using namespace std;
 
+void cleanupCells(Cell* board[][10], int boardSize) 
+{
+    for (int i = 0; i < boardSize; ++i) 
+    {
+        for (int j = 0; j < boardSize; ++j) 
+        {
+            delete board[i][j];
+        }
+    };
+}
+
+
 int main(int argc, char* argv[])
 {
     int stage = 0;
@@ -26,6 +38,7 @@ int main(int argc, char* argv[])
     }
 
     // Clean up board if cells were allocated on the heap
+    cleanupCells(board, boardSize);
 
     return 0;
 }

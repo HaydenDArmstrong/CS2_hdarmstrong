@@ -1,72 +1,125 @@
 #include <iostream>
 #include <string>
+#include <cmath>
+#include <fstream>
 
 using namespace std;
 
-//in c, you cannot put function inside of struct. So highly recommended to not put functions in structures in c++
 
-
-struct AnotherStruct
+struct Triangle
 {
-    int num1;
-
-};
-
-struct Rectangle //structures need to end with a semicolon
-{
-    float side1;
-    float side2;
+    float side1, side2, side3;
     float area;
-    float perimeter;
-    AnotherStruct struct2; //instances of other structures can go into a structure
+
 };
 
-void addThings(Rectangle*, Rectangle*); //prototype function. says need a pointer to rectangle and another pointer to rectangle passed to function
+void promptSides(Triangle*[], int, char);
+void printSides(Triangle*[], int);
+void calcArea(Triangle*[], int);
+
+/// @brief  THis function takes in an array of pointers to Triangle and size and prints size
+/// @param triangles 
+/// @param arrSize 
+void printSides(Triangle* triangles[], int arrSize)
+{
+    for (int i = 0; i < arrSize; i++)
+    {
+        cout << "Triangle " << i+1 << "; "
+             << triangles[i]->side1 << ","
+             << triangles[i]->side2 << ","
+             << triangles[i]->side3 << ","
+             <<" has an area of: " << triangles[i]->area << endl;
+    }
+
+}
+
+///@brief Calcualtes the area for an array of triangle using Heron's Formula
+/// @param triangles
+/// @param arrSize
+    void calcArea(Triangle* triangles[], int arrSize)
+    {
+        for (int i = 0; i < arrSize; i++)
+        {
+            int semiPerim = ((triangles[i]->side1 + triangles[i]->side2 + triangles[i]->side3)/2) ;
+            triangles[i]-> area = sqrt (semiPerim * (semiPerim- triangles[i]->side1) * (semiPerim - triangles[i]->side2) * (semiPerim - triangles[i]->side3));
+        }
+    }
+
+// void addThings(Rectangle*, Rectangle*); //prototype function. says need a pointer to rectangle and another pointer to rectangle passed to function
 
 int main(int argc, char* argv[])
 {
-    int num1;
-    int* num1Ptr; 
+    int arrSize = 3;
+    Triangle* triangles[arrSize];
+    char promptOrFile;
 
-    num1 = 42;
-    num1Ptr = &num1;
+    if(argc >=2 && (string)argv[1] == "P") // if there are more arguments (than just the program), AND that argument is P, do P. else do F
+    {
+        promptOrFile = 'p';
+    }
+    else
+    {
+        promptOrFile = 'F';
+    }
 
-    cout << *num1Ptr << endl; //dereference
+    promptSides(triangles, arrSize, promptOrFile);
 
+    calcArea(triangles, arrSize);
 
+    printSides(triangles, arrSize);
 
-    Rectangle rect1;
-    Rectangle rect2;
-    Rectangle rectangles[10];
-    Rectangle* ptr1;
-    Rectangle* ptrRectangles[10];
-    Rectangle* heapRect = new Rectangle; //allocates onto the heap, from the stack. the pointer is stored on the stack and the value is stored on the heap
-    Rectangle* heapRect2;
+    
 
-    ptr1 = &rect1;
-    ptrRectangles[0] = &rect1;
-
-
-    rect1.side1 = 42;
-    rect1.side2 = 15;
-
-    rect1.area = rect1.side1 * rect1.side2; //area = l times w
-    rect1.perimeter = 2*rect1.side1 + 2*rect1.side2; //perimeter =  2*l + 2*w
-
-    cout << "The rectangle with sides "
-         << rect1.side1 << " and " << rect1.side2
-         << "has an area of " << rect1.area
-         << "and a perimeter of " << rect1.perimeter;
-
-         delete heapRect;
-         delete heapRect2; ///MUST DELETE WHEN YOU ALLOCATE SOMETHING ON THE HEAP before exiting program
-
+    for (int i=0; i < arrSize; i++)
+    {
+        delete triangles[i];
+    }
     return 0;
+
 }
 
-//heap allocated things are accessed by an arrow. stack allocated things are accessed by a period (rect1.perimeter for example)
+/// @brief Create instance of Triangle and store address onside of triangles. 
+///         Ask users for sides of triangle and store with structure
+///         dereferncing the address in triangle
+/// @param triangles
+/// @param arrSize
 
-void addThings(Rectangle* ptr1, Rectangle ptr2)
+void promptSides(Triangle* triangles[], int arrSize, char promptOrFile)
 {
-    cout << ptr1 -> area + (*ptr2).area << endl; //both of these are the same. the arrow is shorthand
+ 
+    if(promptOrFile == 'P')
+    {
+    for(int i = 0; i < arrSize; i++)
+        {
+            triangles[i] = new Triangle; // creates a location on the heap 
+            cout << "Storing triangle" << i+1 << endl;
+            cout << "What is side1? ";
+            cin >> triangles[i]->side1; //arrow to derefernce the address
+            cout << "What is side2? ";
+            cin >> triangles[i]->side2; //arrow to derefernce the address
+            cout << "What is side3? ";
+            cin >> triangles[i]->side3; //arrow to derefernce the address
+        } 
+    }
+    else
+    {
+        ifstream fin;
+        fin.open("input.txt");
+
+        for (int i=0; i < arrSize; i++)
+        {
+        triangles[i] = new Triangle;
+        float side1, side2, side3;
+
+        fin >> side1 >> side2 >> side3;
+
+        triangles[i]->side1 = side1;
+        triangles[i]->side2 = side2;
+        triangles[i]->side3 = side3;
+
+        
+        }
+        fin.close();
+    }
+
 }
