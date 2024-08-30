@@ -136,5 +136,11 @@ bool updateCellState(Cell* board[][10], int boardSize) {
         }
     }
 
+    if (!updated)
+    {
+        cout << "No more stages possible. Program will now end." << endl;
+    }
+    
     return updated;
+
 }
