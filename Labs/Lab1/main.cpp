@@ -6,13 +6,15 @@ using namespace std;
 
 void cleanupCells(Cell* board[][10], int boardSize) 
 {
-    for (int i = 0; i < boardSize; ++i) 
+    for (int i = 0; i < boardSize; ++i) //nested for loop to access array and delete the cells
     {
         for (int j = 0; j < boardSize; ++j) 
         {
             delete board[i][j];
         }
     };
+
+   // cout << "Cells cleaned" << endl;
 }
 
 
@@ -24,6 +26,7 @@ int main(int argc, char* argv[])
     Cell* board[10][10];
 
     initCells(board, boardSize);
+    //cout << "Cells init" << endl;
     readBoard(board, boardSize);
 
     while(boardChanged) {
@@ -37,8 +40,12 @@ int main(int argc, char* argv[])
         stage++;
     }
 
+    //cout << "Cleaning cells..." << endl;
+
     // Clean up board if cells were allocated on the heap
-    cleanupCells(board, boardSize);
+    cleanupCells(board,boardSize);
+
+   // cout << "Program Finished." << endl;;
 
     return 0;
 }
