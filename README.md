@@ -2,12 +2,12 @@
 
 | Basic Info | --- |
 | --- | ---|
-| Course: | CSCI111 - CS1: Foundations of Computer Science |
-| Semester: | Spring 2024 |
-| Instructor: | Corin Chepko |
+| Course: | CSCI112 - CS1: Foundations of Computer Science |
+| Semester: | Fall 2024 |
+| Instructor: | JeremyBergen |
 | Mav Username: | hdarmstrong |
 | GitHub Username: | HaydenDArmstrong |
-| Repository | github.com/HaydenDArmstrong/CS1-HaydenArmstrong |
+| Repository | github.com/HaydenDArmstrong/CS2_HaydenArmstrong |
 
 _______________________________________________________________________________________________________________
 
