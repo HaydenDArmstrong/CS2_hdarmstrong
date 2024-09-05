@@ -1,82 +1,82 @@
-#include <iostream>
-#include <string>
+// #include <iostream>
+// #include <string>
 
-//using namespace std;
+// //using namespace std;
 
-namespace Bob
-{
-
-class Bob
-{
-    private:
-        std::string _name;
-        rectangle::Rectangle rect1;
-    public:
-        Bob(); 
-    std::string getName()
-    {
-        return _name;
-    }
-};
-}
-
-namespace rectangle
-{
-
-class Rectangle
-{
-    private:
-        double _side1, _side2;
-        double _area;
-        Bob::Bob bob1;
-    public: 
-        Rectangle() //getters and setters
-        {
-            _side1 = 0;
-            _side2 = 0;
-            _area = 0;
-        }
-        Rectangle(double side1, double side2)
-        {
-            _side1 = side1;
-            _side2 = side2;
-            _area = side1 * side2;
-        }
-        double area()
-        {
-            return _area;
-        }
-
-};
-}
-
-
-
-int main(int argc, char* argv[])
-{
-    rectangle::Rectangle* rect1 = new rectangle::Rectangle(42, 15);
-    Bob::Bob bob1;
-
-    std::cout << "Rectangle 1 has an area of: "
-         << rect1->area() << std::endl;
-
-    std::cout << "Bob 1 name is "
-         << bob1.getName() << std::endl;
-
-         delete rect1;
-         return 0;
-}
-
-//Bob::Bob(); // :: is the scope resolution operator. refers to a namespace
-
-
-
-
-
-// /*
-// class pen
+// namespace Bob
 // {
-//     private: //private things can only be accessed  and modified through a specific process
+
+// class Bob
+// {
+//     private:
+//         std::string _name;
+//         rectangle::Rectangle rect1;
+//     public:
+//         Bob(); 
+//     std::string getName()
+//     {
+//         return _name;
+//     }
+// };
+// }
+
+// namespace rectangle
+// {
+
+// class Rectangle
+// {
+//     private:
+//         double _side1, _side2;
+//         double _area;
+//         Bob::Bob bob1;
+//     public: 
+//         Rectangle() //getters and setters
+//         {
+//             _side1 = 0;
+//             _side2 = 0;
+//             _area = 0;
+//         }
+//         Rectangle(double side1, double side2)
+//         {
+//             _side1 = side1;
+//             _side2 = side2;
+//             _area = side1 * side2;
+//         }
+//         double area()
+//         {
+//             return _area;
+//         }
+
+// };
+// }
+
+
+
+// int main(int argc, char* argv[])
+// {
+//     //rectangle::Rectangle* rect1 = new rectangle::Rectangle(42, 15);
+//     Bob::Bob bob1;
+
+//     std::cout << "Rectangle 1 has an area of: "
+//          << rect1->area() << std::endl;
+
+//     std::cout << "Bob 1 name is "
+//          << bob1.getName() << std::endl;
+
+//          delete rect1;
+//          return 0;
+// }
+
+// //Bob::Bob(); // :: is the scope resolution operator. refers to a namespace
+
+
+
+
+
+// // /*
+// // class pen
+// // {
+// //     private: //private things can only be accessed  and modified through a specific process
 //              // this is usually variables (called attributes) or sometimes functions ( called methods) you dont want to be modified or varied
 //     string color;
 //     string inkType;
