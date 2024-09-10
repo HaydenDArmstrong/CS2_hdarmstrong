@@ -1,8 +1,8 @@
-# CS2-HaydenArmstrong
+# CS2_HaydenArmstrong
 
 | Basic Info | --- |
 | --- | ---|
-| Course: | CSCI112 - CS2: Data Structures and Algorithims |
+| Course: | CSCI112 - CS2: Data Structures |
 | Semester: | Fall 2024 |
 | Instructor: | JeremyBergen |
 | Mav Username: | hdarmstrong |
