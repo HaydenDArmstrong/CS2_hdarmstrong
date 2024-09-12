@@ -1,0 +1,3 @@
+Hayden,Armstrong,Student at Colorado Mesa University, etc
+id, title, year, genre, rating, director
+string, string, unsigned int, string, float, string
