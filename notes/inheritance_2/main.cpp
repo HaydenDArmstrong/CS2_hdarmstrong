@@ -3,6 +3,8 @@
 
 using namespace std;
 
+students::Student* someFunction(int, string);
+
 
 int main(int argc, char* argv[])
 {
