@@ -31,7 +31,7 @@ points::Point *points::Point::getNearestPoint()
 
 points::Point *points::Point::calcNearestPoint(Point *pointList[], unsigned long arrSize)
 {
-    float minDistance = 9999;
+    float minDistance = 987654321; //set to arbitrarily high value
 
     for (size_t i = 0; i < arrSize; i++) //size_t instead of unsigned long?
     {
@@ -40,7 +40,7 @@ points::Point *points::Point::calcNearestPoint(Point *pointList[], unsigned long
         if (arrayDistance < minDistance) 
         // if the minimum distance is more than the current distance produced from user vs. current array point:
         {
-            minDistance = arrayDistance; //assign the minimum distance as the current array distance_
+            minDistance = arrayDistance; //assign the minimum distance as the current array distance
             nearestPoint = new Point(pointList[i]->getX(), pointList[i]->getY(), pointList[i]->getNearestPoint()); 
             // take the x, y and getNearestPoint() argument and establishes "Point" Object on the heap
         }
