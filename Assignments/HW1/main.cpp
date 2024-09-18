@@ -13,11 +13,14 @@ using namespace std;
 //sstream method
 //view 'strings' notes
 
-//rating is float. year is unsigned integer.
+//rating is float. year is integer.
 //id, title, year, genre, rating, director
-//string, string, unsigned int, string, float, string
+//string, string, int, string, float, string
 
 int main (int , char* argv)
 {
+
+    
+    movies::Database db("MyMovieDataBase", 1);
     return 0;
 }

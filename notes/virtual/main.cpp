@@ -2,47 +2,108 @@
 
 using namespace std;
 
-class BaseClass
+class Animal
 {
-    private:
-    int a;
+    protected: //only a derived class can access Animals constructor
+    Animal();
+
     public:
-    BaseClass(int);
-    void printA();
+    virtual void speak();
 };
 
-class DerivedClass : public BaseClass // derived class is derived from Baseclass
+class Bird : public Animal //derived class of Animal
 {
     public:
-    DerivedClass(int);
-    void printA();
+    Bird();
+     void speak();
 };
 
-int main (int argc, char *argv[])
+class Dog : public Animal
 {
-    DerivedClass myInstance(42);
+    public:
+    Dog();
+     void speak();
+};
 
-    myInstance.printA();
+int main(int argc, char* argv[])
+{
+    Dog myDog;
+    Bird myBird; //make an instance
+
+    myBird.speak(); //run a function through the instance
+    myDog.speak();
+
     return 0;
 }
 
-BaseClass::BaseClass(int A)
+Dog::Dog()
 {
-    a = A;
+    cout << "inside dog constructor"<< endl;
 }
 
-void BaseClass::printA()
+void Dog::speak()
 {
-    cout << "a: " << a << endl;
+    cout << "bark" << endl;
 }
 
-DerivedClass::DerivedClass(int newA) : BaseClass(newA)
+Animal::Animal()
 {
-    cout << "inside DerivedClass constructor" << endl;
+    cout << "Inside Animal Constructor" << endl;
+}
+void Animal::speak()
+{
+    cout << "Animal says lkjfdsajfdsalkjfdsalk" << endl;
 }
 
-void DerivedClass::printA()
+Bird::Bird()
 {
-    cout << "Inside DerivedClass: a: " << endl;
-    this->printA();
+    cout << "Inside Bird Constructor" << endl;
 }
+void Bird::speak()
+{
+    cout << "Bird says tweet" << endl;
+}
+// class BaseClass
+// {
+//     private:
+//     int a;
+//     public:
+//     BaseClass(int);
+//     void printA();
+// };
+
+// class DerivedClass : public BaseClass // derived class is derived from Baseclass
+// {
+//     public:
+//     DerivedClass(int);
+//     void printA();
+// };
+
+// int main (int argc, char *argv[])
+// {
+//     DerivedClass myInstance(42);
+
+//     myInstance.printA();
+//     return 0;
+// }
+
+// BaseClass::BaseClass(int A)
+// {
+//     a = A;
+// }
+
+// void BaseClass::printA()
+// {
+//     cout << "a: " << a << endl;
+// }
+
+// DerivedClass::DerivedClass(int newA) : BaseClass(newA)
+// {
+//     cout << "inside DerivedClass constructor" << endl;
+// }
+
+// void DerivedClass::printA()
+// {
+//     cout << "Inside DerivedClass: a: " << endl;
+//     this->printA();
+// }

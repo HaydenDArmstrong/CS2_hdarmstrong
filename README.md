@@ -24,6 +24,18 @@ ________________________________________________________________________________
 | Self Grade: | 95/100 |
 | Notes: | Functions Correctly|
 
+## Lab #2
+| Name | Value |
+| --- | --- |
+| Name: | Point Distance Lab |
+| Description: | "Point Distance; Lab 2" |
+| Due Date: | 9/16/24 |
+| Status: | complete |
+| Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Labs/Lab2 |
+| Self Grade: | 100/100 |
+| Notes: | Functions Correctly|
+
+
 _______________________________________________________________________________________________________________
 
 # Homework
