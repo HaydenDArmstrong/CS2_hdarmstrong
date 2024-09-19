@@ -10,7 +10,7 @@ points::Point::Point(int X, int Y, points::Point *closestPoint)
 // Destructor
 points::Point::~Point()
 {
-    delete nearestPoint;
+    delete nearestPoint; //i guess
 }
 
 // Getters

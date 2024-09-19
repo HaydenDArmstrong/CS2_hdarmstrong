@@ -1,8 +1,10 @@
 #include "database.h"
+#include <fstream>
 // should have the variables name, imdb id, array for movies as pointers.
 // shgould be able to add remove, display, and search for movie given title or genre, AND print table of movies
 //assume there will never be more thn 100 movies
 //should probably read in from file here
+
 using namespace std;
 
 
@@ -13,3 +15,12 @@ using namespace std;
 //         cout << Movies::movies[i].getId() << endl;
 //     }
 // }
+
+void readInFile(string filename)
+{
+    std::ifstream fin;
+
+    fin.open(filename);
+
+
+}

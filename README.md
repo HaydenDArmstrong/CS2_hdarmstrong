@@ -4,7 +4,7 @@
 | --- | ---|
 | Course: | CSCI112 - CS2: Data Structures |
 | Semester: | Fall 2024 |
-| Instructor: | JeremyBergen |
+| Instructor: | Jeremy Bergen |
 | Mav Username: | hdarmstrong |
 | GitHub Username: | HaydenDArmstrong |
 | Repository | github.com/HaydenDArmstrong/CS2_HaydenArmstrong |
@@ -42,11 +42,11 @@ ________________________________________________________________________________
 
 ## Assignment #1
 | Name | Value |
-| --- | --- |
+|  | --- |
 | Name: | Homework 1 |
-| Description: | "n/a" |
-| Due Date: | n/a |
-| Status: | n/a |
-| Location: | n/a |
+| Description: | "Movie database" |
+| Due Date: | 9/23/24 |
+| Status: | in Progress |
+| Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/HW1 |
 | Self Grade: | n/a |
 | Notes: | n/a |
