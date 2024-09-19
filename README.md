@@ -42,7 +42,7 @@ ________________________________________________________________________________
 
 ## Assignment #1
 | Name | Value |
-|  | --- |
+| --- | --- |
 | Name: | Homework 1 |
 | Description: | "Movie database" |
 | Due Date: | 9/23/24 |
