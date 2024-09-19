@@ -1,4 +1,4 @@
-# CS2_HaydenArmstrong
+# CS2_hdarmstrong
 
 | Basic Info | --- |
 | --- | ---|
@@ -7,7 +7,7 @@
 | Instructor: | Jeremy Bergen |
 | Mav Username: | hdarmstrong |
 | GitHub Username: | HaydenDArmstrong |
-| Repository | github.com/HaydenDArmstrong/CS2_HaydenArmstrong |
+| Repository | github.com/HaydenDArmstrong/CS2_hdarmstrong |
 
 _______________________________________________________________________________________________________________
 
