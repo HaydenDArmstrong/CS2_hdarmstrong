@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -163,15 +164,24 @@ void movies::Database::displayMovies() // table format
         cout << "No movies in the database." << endl;
         return;
     }
-    // TODO: format this better
+        cout << left << setw(40) << "Title"
+         << setw(6) << "Year"
+         << setw(20) << "Director"
+         << setw(15) << "Genre"
+         << setw(10) << "IMDB ID"
+         << setw(10) << "Rating" << endl;
+
+    cout << string(98, '-') << endl; // Print a separator line
+
+    // Print each movie's details
     for (int i = 0; i < movieAmount; ++i)
     {
-        cout << "Title: " << _movieList[i]->getTitle()
-             << ", Year: " << _movieList[i]->getYear()
-             << ", Director: " << _movieList[i]->getDirector()
-             << ", Genre: " << _movieList[i]->getGenre()
-             << ", IMDB ID: " << _movieList[i]->getImdbId()
-             << ", IMDB Rating: " << _movieList[i]->getRating() << endl;
+        cout << left << setw(40) << _movieList[i]->getTitle()
+             << setw(6) << _movieList[i]->getYear()
+             << setw(20) << _movieList[i]->getDirector()
+             << setw(15) << _movieList[i]->getGenre()
+             << setw(10) << _movieList[i]->getImdbId()
+             << setw(10) << _movieList[i]->getRating() << endl;
     }
 }
 
