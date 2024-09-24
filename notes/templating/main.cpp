@@ -20,18 +20,18 @@ class SomeClass
     SomeClass& operator+(SomeClass&);
 
 };
+// SomeClass SomeClass::operator+(SomeClass& rightSide)
+// {
+//     SomeClass tmpClass(this->_number1 + rightSide.getNumber1());
 
-SomeClass SomeClass::operator+(SomeClass& rightSide)
-{
-    SomeClass tmpClass(this->_number1 + rightSide.getNumber1());
+//     return tmpClass;
+// };
 
-    return tmpClass;
-}
 
-int someClass::getNumber1()
-{
-    return _number1;
-};
+// int someClass::getNumber1()
+// {
+//     return _number1;
+// };
 
 
 

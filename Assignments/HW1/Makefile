@@ -1,7 +1,7 @@
 # compiler name
 CXX = g++
 
-# C++ compiler flags
+# C++ compiler flags 
 # -c : just do preprocess; compile and assemble into object files
 # -g : adds debugging information to the executable file
 # -Wall : turns on most, but not  all, compiler warnings
@@ -13,7 +13,7 @@ CXXFLAGS = -c -g -Wall -std=c++17
 PROGRAM = main.out
 
 # list all .cpp files separated by space
-CPPFILES = main.cpp database.cpp movies.cpp
+CPPFILES =  database.cpp movies.cpp main.cpp
 
 # make all rule/default rule that'll be run when we run "make"
 # first compile each file to object file
@@ -27,7 +27,6 @@ all:
 clean:
 	rm -f $(PROGRAM) *.o
 
-# FIXME
-# Add a rule to run the program
+# A rule to run the program
 run:
 	./$(PROGRAM)

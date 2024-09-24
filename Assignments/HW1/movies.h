@@ -1,38 +1,40 @@
 #pragma once
 #include <iostream>
 #include <string>
-// assume that movies have variables imdb id, title , year, genre, rating, director
-//use getters and setters with the actual variables being private
-// assume that all variables will have one value (one director, one genre, etc)
+
+using namespace std;
+
 namespace movies
 {
     class Movie
     {
-        private:
-         string _imdbId;
-         string _title;
-         int _year;
-         string _genre;
-         float _rating;
-         string _director;
+    private:
+        string _imdbId;
+        string _title;
+        int _year;
+        string _genre;
+        float _rating;
+        string _director;
 
-        public:
-            string getImdbId();
-            void setImdbId(string);
+    public:
+        Movie(string imdb_id, string title, int year, string genre, float rating, string director);
 
-            string getTitle();
-            void setTitle(string);
+        string getImdbId();
+        void setImdbId(string);
 
-            int getYear();
-            void setYear(int);
+        string getTitle();
+        void setTitle(string);
 
-            string getGenre();
-            void setGenre(string);
+        int getYear();
+        void setYear(int);
 
-            float getRating();
-            void setRating(float);
+        string getGenre();
+        void setGenre(string);
 
-            string getDirector();
-            void setDirector(string);
+        float getRating();
+        void setRating(float);
+
+        string getDirector();
+        void setDirector(string);
     };
 }
