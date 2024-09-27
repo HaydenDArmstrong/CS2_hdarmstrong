@@ -21,7 +21,7 @@ int main()
 
     do
     {
-        cout << "\nMenu:" << endl;
+        cout << "\nMovie Database Menu:" << endl;
         cout << "1. Add Movie" << endl;
         cout << "2. Remove Movie" << endl;
         cout << "3. Search by Title" << endl;
