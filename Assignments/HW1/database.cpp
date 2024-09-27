@@ -5,7 +5,6 @@
 #include <iomanip>
 
 using namespace std;
-
 movies::Database::Database(string db_name, int db_id)
 {
     _db_name = db_name;
