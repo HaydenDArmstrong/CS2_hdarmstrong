@@ -31,7 +31,7 @@ points::Point *points::Point::getNearestPoint()
 
 points::Point *points::Point::calcNearestPoint(Point *pointList[], unsigned long arrSize)
 {
-    float minDistance = 987654321; //set to arbitrarily high value
+    float minDistance = 987654321; //set to arbitrarily high value, should probably not do this but i forgot how to do this better
 
     for (size_t i = 0; i < arrSize; i++) //size_t instead of unsigned long?
     {
