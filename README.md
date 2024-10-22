@@ -61,3 +61,14 @@ ________________________________________________________________________________
 | Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/HW1 |
 | Self Grade: | 98/100 |
 | Notes: | n/a |
+
+## Assignment #1
+| Name | Value |
+| --- | --- |
+| Name: | Homework 2 |
+| Description: | "Media Database" |
+| Due Date: | 10/14/24 |
+| Status: | in progress |
+| Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/HW2 |
+| Self Grade: | n/a |
+| Notes: | n/a |
