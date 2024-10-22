@@ -1,6 +1,7 @@
 #pragma once
 #include "movies.h" // now database.h accesses movies header.
                     //main.cpp does not need to know movies.h
+#include "media.h"
 
 using namespace std;
 

@@ -1,56 +1,26 @@
 #pragma once
-#include "media.h"  
+#include "media.h"
+#include <string>
 
-namespace tvshows {
+namespace tvshow {
     class Tvshow : public media::Media {
-        private:
-        std::string genre;
-        float rating;
-        int episodes;
+    private:
+        double _tvRating;
+        int _numEpisodes;
+        std::string _tvGenre;
 
-        public:
-        Tvshow(std::string mediaId, std::string mediaTitle, int mediaYear, std::string tvGenre, float tvRating, int numEpisodes)
-        {
-        Media::setId(mediaId);
-        Media::setTitle(mediaTitle);
-        Media::setYear(mediaYear);
+    public:
+        // Constructor declaration
+        Tvshow(std::string mediaId, std::string mediaTitle, int mediaYear, std::string tvGenre, double tvRating, int numEpisodes);
 
-        genre = tvGenre;
-        rating = tvRating;
-        episodes = numEpisodes;
-        }
+        // Getter and setter prototypes
+        std::string getTvGenre();
+        void setTvGenre(std::string tvGenre);
 
-        std::string getGenre()
-        {
-            return genre;
-        }
-        float getRating()
-        {
-            return rating;
-        }
-        int getNumEpisodes()
-        {
-            return episodes;
-        }
+        double getRating();
+        void setRating(double tvRating);
 
-        void setGenre(std::string tvGenre)
-        {
-            genre = tvGenre;
-        }
-
-        void setRating(float tvRating)
-        {
-            rating = tvRating;
-        }
-
-        void setNumEpisodes(int numEpisodes)
-        {
-            episodes = numEpisodes;
-        }
-        };
-    
-    string displayInfo() {
-        Media::displayInfo(); // Display common media info
-        std::cout << "Genre: " << genre << "\nRating: " << rating << "\nNumber of Episodes: " << numEpisodes << std::endl;
-    }
-    }
+        int getNumEpisodes();
+        void setNumEpisodes(int numEpisodes);
+    };
+}

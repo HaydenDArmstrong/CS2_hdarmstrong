@@ -1,55 +1,48 @@
 #pragma once
-#include <string>
 #include <iostream>
-namespace media {
-    class Media{
-    protected:
-    std::string id;
-    std::string title;
-    int year;
+#include <string>
+
+using namespace std;
+
+namespace media
+{
+    class Media
+    {
+    private:
+        string _mediaId;
+        string _mediaTitle;
+        int _mediaYear;
+        string _mediaGenre;
+        // float _rating;
+        // string _director;
 
     public:
-     Media(std::string mediaId, std::string mediaTitle, int mediaYear)
-     {
-        id = mediaId;
-        title = mediaTitle;
-        year = mediaYear;
-     }
+        Media(string mediaId, string mediaTitle, int mediaYear);
 
-     virtual ~Media() = default;
+    
+        string getId();
+        void setId(string);
 
-     void displayInfo() {
-        //in progress
-    }
+        string getTitle();
+        void setTitle(string);
 
-     //getters
-     std::string getId()
-     {
-        return id;
-     }
+        int getYear();
+        void setYear(int);
 
-     std::string getTitle()
-     {
-        return title;
-     }
+        // string getGenre();
+        // void setGenre(string);
 
-     int getYear()
-     {
-        return year;
-     }
+        virtual string printInfo();
 
-     void setId(std::string mediaId)
-     {
-        id = mediaId;
-     }
+        // float getRating();
+        // void setRating(float);
 
-     void setTitle(std::string mediaTitle){
-        title = mediaTitle;
-     }
-    void setYear(int mediaYear) {
-        year = mediaYear;
-    }
+        // string getDirector();
+        // void setDirector(string);
 
-
+//         virtual string media::Media::printinfo()
+// {
+//             cout << "ID: " << mediaId << ", Title: " << mediaTitle << "Year: " << mediaYear << " Genre : ";
+//     }
     };
 }
