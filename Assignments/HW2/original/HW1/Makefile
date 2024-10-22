@@ -13,7 +13,7 @@ CXXFLAGS = -c -g -Wall -std=c++17
 PROGRAM = main.out
 
 # list all .cpp files separated by space
-CPPFILES =  database.cpp movies.cpp music.cpp tvshows.cpp media.cpp main.cpp
+CPPFILES =  database.cpp movies.cpp main.cpp
 
 # make all rule/default rule that'll be run when we run "make"
 # first compile each file to object file

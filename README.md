@@ -35,6 +35,17 @@ ________________________________________________________________________________
 | Self Grade: | 100/100 |
 | Notes: | Functions Correctly|
 
+## Lab #3
+| Name | Value |
+| --- | --- |
+| Name: | Fractions Lab |
+| Description: | "Fractions Lab; Lab 3" |
+| Due Date: | 10/7/24 |
+| Status: | complete |
+| Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Labs/Lab3 |
+| Self Grade: | 100/100 |
+| Notes: | Functions Correctly|
+
 
 _______________________________________________________________________________________________________________
 
@@ -46,7 +57,7 @@ ________________________________________________________________________________
 | Name: | Homework 1 |
 | Description: | "Movie database" |
 | Due Date: | 9/23/24 |
-| Status: | in Progress |
+| Status: | Finished |
 | Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/HW1 |
-| Self Grade: | n/a |
+| Self Grade: | 98/100 |
 | Notes: | n/a |
