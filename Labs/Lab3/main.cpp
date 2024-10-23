@@ -5,21 +5,51 @@ void tests();
 
 int main(int argc, char* argv[])
 {
+
     if(argc >= 2 && (string)argv[1] == "test")
     {
         tests();
         return 0;
     }
+    
+    int num1, denom1, num2, denom2;
 
-    cout << "Fraction 1: " << endl;
-    fractions::Fraction frac1;
-    cout << "Fraction 2: " << endl;
-    fractions::Fraction frac2;
+    // Prompt for first fraction
+    cout << "Enter numerator for Fraction 1: ";
+    cin >> num1;
+    cout << "Enter denominator for Fraction 1: ";
+    cin >> denom1;
 
+    if (denom1 == 0) {
+        cerr << "Error: Denominator cannot be zero." << endl;
+        return 1;  // Exit the program if denominator is zero
+    }
+
+    // Create first fraction
+    fractions::Fraction frac1(num1, denom1);
+    cout << "You entered Fraction 1: " << frac1 << endl;
+
+    // Prompt for second fraction
+    cout << "Enter numerator for Fraction 2: ";
+    cin >> num2;
+    cout << "Enter denominator for Fraction 2: ";
+    cin >> denom2;
+
+    if (denom2 == 0) {
+        cerr << "Error: Denominator cannot be zero." << endl;
+        return 1;  // Exit if denominator is zero
+    }
+
+    // Create second fraction
+    fractions::Fraction frac2(num2, denom2);
+    cout << "You entered Fraction 2: " << frac2 << endl;
+
+    // Perform operations and display results
     cout << frac1 << " + " << frac2 << " = " << frac1 + frac2 << endl;
     cout << frac1 << " - " << frac2 << " = " << frac1 - frac2 << endl;
     cout << frac1 << " * " << frac2 << " = " << frac1 * frac2 << endl;
     cout << frac1 << " / " << frac2 << " = " << frac1 / frac2 << endl;
+
 
     return 0;
 }
