@@ -1,95 +1,142 @@
+#include "database.h" 
+#include "media.h"
+#include <fstream>
 #include <iostream>
-#include <string>
-#include "database.h"
+#include <sstream>
+#include <iomanip>
 
 using namespace std;
 
-int main()
-{
-    string file = "movies.csv"; //for read and write
+void displayMenu() {
+    cout << "Media Database Menu:" << endl;
+    cout << "1. Load Movies" << endl;
+    cout << "2. Load TV Shows" << endl;
+    cout << "3. Load Music" << endl;
+    cout << "4. Add Movie" << endl;
+    cout << "5. Add TV Show" << endl;
+    cout << "6. Add Music" << endl;
+    cout << "7. Remove Media" << endl;
+    cout << "8. Print All Media" << endl;
+    cout << "9. Write Database to File" << endl;
+    cout << "0. Exit" << endl;
+    cout << "Select an option: ";
+}
 
-    // Create an instance
-    movies::Database myDatabase("Movie Database", 001);
+// void printMedia(const db::Database& db) {
+//     cout << "Movies:" << endl;
+//     db.printMovies();
+//     cout << "TV Shows:" << endl;
+//     db.printTVShows();
+//     cout << "Music:" << endl;
+//     db.printMusic();
+// }
 
-    myDatabase.readInFile(file);
-
+int main() {
+    db::Database mediaDatabase("MyMediaDB", 1);
     int choice;
-    string title, genre, imdb_id, director;
-    int year;
-    float rating;
-    movies::Movie *newMovie = nullptr;
+    string mediaId, mediaTitle;
 
-    do
-    {
-        cout << "\nMovie Database Menu:" << endl;
-        cout << "1. Add Movie" << endl;
-        cout << "2. Remove Movie" << endl;
-        cout << "3. Search by Title" << endl;
-        cout << "4. Search by Genre" << endl;
-        cout << "5. Display All Movies" << endl;
-        cout << "6. Exit" << endl;
-        cout << "Enter your choice: ";
+    do {
+        displayMenu();
         cin >> choice;
-        cin.ignore();
+        cin.ignore(); // Ignore newline character after choice input
 
-        switch (choice)
-        {
-        case 1: // Add Movie
-        {
-            cout << "Enter IMDb ID: ";
-            getline(cin, imdb_id);
-            cout << "Enter Title: ";
-            getline(cin, title);
-            cout << "Enter Year: ";
-            cin >> year;
-            cout << "Enter Genre: ";
-            cin.ignore();
-            getline(cin, genre);
-            cout << "Enter Rating (0.0 - 10.0): ";
-            cin >> rating;
-            cin.ignore();
-            cout << "Enter Director: ";
-            getline(cin, director);
+        switch (choice) {
+            case 1: {
+                mediaDatabase.readInMovie("movies.csv");
+                break;
+            }
+            case 2: {
+                mediaDatabase.readInTVShow("tvshows.csv");
+                break;
+            }
+            case 3: {
+                mediaDatabase.readInMusic("music.csv");
+                break;
+            }
+            case 4: {
+                // Example for adding a movie
+                cout << "Enter Movie ID, Title, Year, Genre, Rating, Director (comma-separated): ";
+                getline(cin, mediaId, ',');
+                getline(cin, mediaTitle, ',');
+                int year;
+                cin >> year;
+                cin.ignore(); // Ignore comma
+                string genre, director;
+                getline(cin, genre, ',');
+                float rating;
+                cin >> rating;
+                cin.ignore(); // Ignore comma
+                getline(cin, director);
+                
+                movies::Movie* newMovie = new movies::Movie(mediaId, mediaTitle, year, genre, rating, director);
+                mediaDatabase.addMovie(newMovie);
+                break;
+            }
+            case 5: {
+                // Example for adding a TV show
+                cout << "Enter TV Show ID, Title, Year, Genre, Rating, Episodes (comma-separated): ";
+                getline(cin, mediaId, ',');
+                getline(cin, mediaTitle, ',');
+                int year, episodes;
+                cin >> year;
+                cin.ignore(); // Ignore comma
+                string genre;
+                getline(cin, genre, ',');
+                float rating;
+                cin >> rating;
+                cin.ignore(); // Ignore comma
+                cin >> episodes;
 
-            newMovie = new movies::Movie(imdb_id, title, year, genre, rating, director);
-            myDatabase.addMovie(newMovie);
-            myDatabase.writeToFile(file);
+                tvshow::Tvshow* newTVShow = new tvshow::Tvshow(mediaId, mediaTitle, year, genre, rating, episodes);
+                mediaDatabase.addTVShow(newTVShow);
+                break;
+            }
+            case 6: {
+                // Example for adding music
+                cout << "Enter Music ID, Title, Year, Composer, Genre, Tracks, Playtime (comma-separated): ";
+                getline(cin, mediaId, ',');
+                getline(cin, mediaTitle, ',');
+                int year, tracks, playtime;
+                cin >> year;
+                cin.ignore(); // Ignore comma
+                string composer, genre;
+                getline(cin, composer, ',');
+                getline(cin, genre, ',');
+                cin >> tracks;
+                cin.ignore(); // Ignore comma
+                cin >> playtime;
+
+                music::Music* newMusic = new music::Music(mediaId, mediaTitle, year, composer, genre, tracks, playtime);
+                mediaDatabase.addMusic(newMusic);
+                break;
+            }
+            case 7: {
+                cout << "Enter Media ID to remove: ";
+                getline(cin, mediaId);
+                mediaDatabase.removeMovie(mediaId);
+                mediaDatabase.removeTvshow(mediaId);
+                mediaDatabase.removeMusic(mediaId);
+                break;
+            }
+            case 8: {
+                //printMedia(mediaDatabase);
+                break;
+            }
+            case 9: {
+                //mediaDatabase.writeToFile("output.csv");
+                break;
+            }
+            case 0: {
+                cout << "Exiting program." << endl;
+                break;
+            }
+            default: {
+                cout << "Invalid choice, please try again." << endl;
+                break;
+            }
         }
-        break;
-
-        case 2: // Remove Movie
-            cout << "Enter IMDb ID to remove: ";
-            getline(cin, imdb_id);
-            myDatabase.deleteMovie(imdb_id);
-            myDatabase.writeToFile(file);
-            break;
-
-        case 3: // Search by Title
-            cout << "Enter Title to search: ";
-            getline(cin, title);
-            myDatabase.searchTitle(title);
-            break;
-
-        case 4: // Search by Genre
-            cout << "Enter Genre to search: ";
-            getline(cin, genre);
-            myDatabase.searchGenre(genre);
-            break;
-
-        case 5: // Display All Movies
-            myDatabase.displayMovies();
-            break;
-
-        case 6: // Exit
-            cout << "Exiting the program." << endl;
-            break;
-
-        default:
-            cout << "Invalid choice! Please try again." << endl;
-            break;
-        }
-
-    } while (choice != 6);
+    } while (choice != 0);
 
     return 0;
 }

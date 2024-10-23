@@ -16,6 +16,9 @@ namespace music {
         // Constructor declaration
         Music(std::string mediaId, std::string mediaTitle, int mediaYear, std::string composer, std::string musGenre, int numTracks, int totalPlaytime);
 
+        std::string displayInfo() const override {
+        return "Music Info: Title, Artist, Album";
+    }
         // Getter and setter prototypes
         std::string getComposer();
         void setComposer(std::string composer);
@@ -23,8 +26,7 @@ namespace music {
         std::string getMusGenre();
         void setMusGenre(std::string musGenre);
 
-        std::string getComposer();
-        void setComposer(std::string composer);
+    
 
         int getNumTracks();
         void setNumTracks(int numTracks);

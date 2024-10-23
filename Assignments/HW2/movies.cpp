@@ -1,69 +1,40 @@
 #include "movies.h"
 using namespace std;
 
-movies::Movie::Movie(string imdb_id, string title, int year, string genre, float rating, string director)
+movies::Movie::Movie(string mediaId, string mediaTitle, int mediaYear, string movGenre, float movRating, string movDirector)
+                  : media::Media(mediaId, mediaTitle, mediaYear)
 {
-   _imdbId = imdb_id;
-   _title = title;
-   _year = year;
-   _genre = genre;
-   _rating = rating;
-   _director = director;
+   _movGenre = movGenre;
+   _movRating = movRating;
+   _movDirector = movDirector;
 }
 
-// getters
-string movies::Movie::getImdbId()
-{
-   return _imdbId;
-}
 
-string movies::Movie::getTitle()
-{
-   return _title;
-}
-int movies::Movie::getYear()
-{
-   return _year;
-}
 string movies::Movie::getGenre()
 {
-   return _genre;
+   return _movGenre;
 }
 float movies::Movie::getRating()
 {
-   return _rating;
+   return _movRating;
 }
 string movies::Movie::getDirector()
 {
-   return _director;
+   return _movDirector;
 }
 
-// setters
-void movies::Movie::setImdbId(string imdbId)
+
+void movies::Movie::setGenre(string movGenre)
 {
-   _imdbId = imdbId;
+   _movGenre = movGenre;
 }
 
-void movies::Movie::setTitle(string title)
+void movies::Movie::setRating(float movRating)
 {
-   _title = title;
-}
-void movies::Movie::setYear(int year)
-{
-   _year = year;
+      _movRating = movRating;
 }
 
-void movies::Movie::setGenre(string genre)
+void movies::Movie::setDirector(string movDirector)
 {
-   _genre = genre;
-}
-
-void movies::Movie::setRating(float rating)
-{
-      _rating = rating;
-}
-
-void movies::Movie::setDirector(string Director)
-{
-   _director = Director;
+   _movDirector = movDirector;
 }

@@ -19,6 +19,12 @@ namespace media
     public:
         Media(string mediaId, string mediaTitle, int mediaYear);
 
+        virtual ~Media() {}
+
+        virtual std::string displayInfo() const {
+        return "Media Info";
+    }
+
     
         string getId();
         void setId(string);
@@ -31,18 +37,10 @@ namespace media
 
         // string getGenre();
         // void setGenre(string);
-
-        virtual string printInfo();
-
         // float getRating();
         // void setRating(float);
 
         // string getDirector();
         // void setDirector(string);
-
-//         virtual string media::Media::printinfo()
-// {
-//             cout << "ID: " << mediaId << ", Title: " << mediaTitle << "Year: " << mediaYear << " Genre : ";
-//     }
-    };
+};
 }

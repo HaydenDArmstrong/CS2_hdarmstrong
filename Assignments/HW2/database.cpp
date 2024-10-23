@@ -1,145 +1,319 @@
 #include "database.h"
+#include "media.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
 
 using namespace std;
-movies::Database::Database(string db_name, int db_id)
+db::Database::Database(string db_name, int db_id)
 {
     _db_name = db_name;
     _db_id = db_id;
-    movieAmount = 0;
 }
-
-void movies::Database::readInFile(string filename)
-{
-    string line;
-
-    ifstream fin;
-
-    fin.open(filename);
-
-    if (fin.is_open())
-    {
-        while (getline(fin, line))
-        {
-            istringstream iss(line);
-
-            iss.str(line);
-
-            string imdbID, title, genre, director;
-            int year;
-            float rating;
-
-            getline(iss, imdbID, ',');
-            getline(iss, title, ',');
-            iss >> year;
-            iss.ignore();
-            getline(iss, genre, ',');
-            iss >> rating;
-            iss.ignore();
-            getline(iss, director, ',');
-            // cout << title; //sanity check
-
-            Movie *newMovie = new Movie(imdbID, title, year, genre, rating, director);
-            addMovie(newMovie);
-        }
-        fin.close();
-    }
-}
-
-void movies::Database::writeToFile(string filename)
-{
-    ofstream fout(filename);
-
-    if (!fout.is_open())
-    {
-        cout << "File: " << filename << " was not found to write into.";
-    }
-
-    for (int i = 0; i < movieAmount; ++i)
-    {
-        fout << _movieList[i]->getImdbId() << ","
-             << _movieList[i]->getTitle() << ","
-             << _movieList[i]->getYear() << ","
-             << _movieList[i]->getGenre() << ","
-             << _movieList[i]->getRating() << ","
-             << _movieList[i]->getDirector()
-             << endl; // DONT FORGET THIS END LINE
-    }
-}
-
-void movies::Database::addMovie(Movie *newMovie)
-{
-    if (movieAmount >= 100)
-    {
-        cout << "Database is full. Cannot add more movies." << endl;
+// Function to add a new movie to the database
+void db::Database::addMovie(movies::Movie* newMovie) {
+    if (movieCount >= 100) {
+        std::cout << "Database is full. Cannot add more movies." << std::endl;
         return;
     }
-    _movieList[movieAmount] = newMovie;
-    ++movieAmount;
+    _movieList[movieCount] = newMovie;
+    ++movieCount;
 
-    // cout << " Movie added successfully, " << movieAmount << "/100" << endl;
+    std::cout << "Movie added successfully, " << movieCount << "/100" << std::endl;
 }
 
-void movies::Database::deleteMovie(string &imdb_id) // given imdbID, remove movie
+// Function to add a new TV show to the database
+void db::Database::addTVShow(tvshow::Tvshow* newTVShow) {
+    if (tvCount >= 100) {
+        std::cout << "Database is full. Cannot add more TV shows." << std::endl;
+        return;
+    }
+    _tvList[tvCount] = newTVShow;
+    ++tvCount;
+
+    std::cout << "TV Show added successfully, " << tvCount << "/100" << std::endl;
+}
+
+// Function to add a new music to the database
+void db::Database::addMusic(music::Music* newMusic) {
+    if (musicCount >= 100) {
+        std::cout << "Database is full. Cannot add more music." << std::endl;
+        return;
+    }
+    _musicList[musicCount] = newMusic;
+    ++musicCount;
+
+    std::cout << "Music added successfully, " << musicCount << "/100" << std::endl;
+}
+
+void db::Database::readInMovie(std::string filename) {
+    std::string line;
+    std::ifstream fin(filename);
+
+    if (fin.is_open()) {
+        while (getline(fin, line)) {
+            std::istringstream iss(line);
+
+            std::string mediaId, mediaTitle, movDirector, movGenre;
+            int mediaYear;
+            float movRating;
+
+            // Reading each field
+            if (getline(iss, mediaId, ',') &&
+                getline(iss, mediaTitle, ',') &&
+                iss >> mediaYear &&
+                iss.ignore() &&  // Ignore the comma
+                getline(iss, movGenre, ',') &&
+                iss >> movRating &&
+                iss.ignore() &&  // Ignore the comma
+                getline(iss, movDirector, ',')) {
+                
+                // Create a new movie and add it to the database
+                movies::Movie *newMovie = new movies::Movie(mediaId, mediaTitle, mediaYear, movGenre, movRating, movDirector);
+                addMovie(newMovie);
+            } else {
+                std::cerr << "Error reading line: " << line << std::endl; // Error handling
+            }
+        }
+        fin.close();
+    } else {
+        std::cerr << "Unable to open file: " << filename << std::endl;
+    }
+}
+
+void db::Database::readInTVShow(std::string filename) {
+    std::string line;
+    std::ifstream fin(filename);
+
+    if (fin.is_open()) {
+        while (getline(fin, line)) {
+            std::istringstream iss(line);
+
+            std::string mediaId, mediaTitle, tvGenre;
+            int mediaYear, numEpisodes;
+            double tvRating;
+
+            // Reading each field from the CSV
+            if (getline(iss, mediaId, ',') &&
+                getline(iss, mediaTitle, ',') &&
+                iss >> mediaYear &&
+                iss.ignore() &&  // Ignore the comma
+                getline(iss, tvGenre, ',') &&
+                iss >> tvRating &&
+                iss.ignore() &&  // Ignore the comma
+                iss >> numEpisodes) {
+
+                // Create a new TV show object and add it to the database
+                tvshow::Tvshow *newTVShow = new tvshow::Tvshow(mediaId, mediaTitle, mediaYear, tvGenre, tvRating, numEpisodes);
+                addTVShow(newTVShow); // Assuming you have a function addTVShow in your database class
+            } else {
+                std::cerr << "Error reading line: " << line << std::endl; // Error handling
+            }
+        }
+        fin.close();
+    } else {
+        std::cerr << "Unable to open file: " << filename << std::endl;
+    }
+}
+
+
+void db::Database::readInMusic(std::string filename) {
+    std::string line;
+    std::ifstream fin(filename);
+
+    if (fin.is_open()) {
+        while (getline(fin, line)) {
+            std::istringstream iss(line);
+
+            std::string mediaId, mediaTitle, composer, musGenre;
+            int mediaYear, numTracks, totalPlaytime;
+
+            // Reading each field from the CSV
+            if (getline(iss, mediaId, ',') &&
+                getline(iss, mediaTitle, ',') &&
+                iss >> mediaYear &&
+                iss.ignore() &&  // Ignore the comma
+                getline(iss, composer, ',') &&
+                getline(iss, musGenre, ',') &&
+                iss >> numTracks &&
+                iss.ignore() &&  // Ignore the comma
+                iss >> totalPlaytime) {
+
+                // Create a new Music object and add it to the database
+                music::Music *newMusic = new music::Music(mediaId, mediaTitle, mediaYear, composer, musGenre, numTracks, totalPlaytime);
+                addMusic(newMusic); // Assuming you have a function addMusic in your database class
+            } else {
+                std::cerr << "Error reading line: " << line << std::endl; // Error handling
+            }
+        }
+        fin.close();
+    } else {
+        std::cerr << "Unable to open file: " << filename << std::endl;
+    }
+}
+
+
+
+
+// void movies::Database::writeToFile(string filename)
+// {
+//     ofstream fout(filename);
+
+//     if (!fout.is_open())
+//     {
+//         cout << "File: " << filename << " was not found to write into.";
+//     }
+
+//     for (int i = 0; i < movieAmount; ++i)
+//     {
+//         fout << _movieList[i]->getImdbId() << ","
+//              << _movieList[i]->getTitle() << ","
+//              << _movieList[i]->getYear() << ","
+//              << _movieList[i]->getGenre() << ","
+//              << _movieList[i]->getRating() << ","
+//              << _movieList[i]->getDirector()
+//              << endl; // DONT FORGET THIS END LINE
+//     }
+// }
+
+    template <typename MediaType>
+    void db::Database::writeMediaToFile(std::string filename, MediaType* mediaList[], int mediaCount,
+                                     std::string (*getMediaInfoFunc)(MediaType*)) {
+        std::ofstream fout(filename);
+
+        if (!fout.is_open()) {
+            std::cout << "Unable to open file: " << filename << " for writing." << std::endl;
+            return;
+        }
+
+        for (int i = 0; i < mediaCount; ++i) {
+            fout << getMediaInfoFunc(mediaList[i]) << std::endl;
+        }
+
+        fout.close();
+    }
+
+    std::string getMovieInfo(movies::Movie* movie) {
+    std::ostringstream oss;
+    oss << movie->getId() << "," 
+        << movie->getTitle() << ","
+        << movie->getYear() << ","
+        << movie->getGenre() << ","
+        << movie->getRating() << "," 
+        << movie->getDirector();
+    return oss.str();
+}
+
+std::string getTVShowInfo(tvshow::Tvshow* tvshow) {
+    std::ostringstream oss;
+    oss << tvshow->getId() << ","
+        << tvshow->getTitle() << ","
+        << tvshow->getYear() << ","
+        << tvshow->getTvGenre() << ","
+        << tvshow->getTvRating() << ","
+        << tvshow->getNumEpisodes();
+    return oss.str();
+}
+
+std::string getMusicInfo(music::Music* music) {
+    std::ostringstream oss;
+    oss << music->getId() << ","
+        << music->getTitle() << ","
+        << music->getYear() << ","
+        << music->getComposer() << ","
+        << music->getMusGenre() << ","
+        << music->getNumTracks() << ","
+        << music->getTotalPlaytime();
+    return oss.str();
+}
+
+
+
+template<typename T1>
+void db::Database::addMedia(T1* newMedia, T1* mediaList[], int& mediaCount)
 {
-    bool found = false;
-    for (int i = 0; i < movieAmount; ++i)
-    {
-        if (_movieList[i]->getImdbId() == imdb_id) // if there is a matching id in db:
-        {
-            delete _movieList[i];
+    if (mediaCount >= 100) {
+        cout << "Database is full. Cannot add more media." << endl;
+        return;
+    }
+    mediaList[mediaCount] = newMedia;
+    ++mediaCount;
+}
+
+void db::Database::addMovie(movies::Movie *newMovie) {
+    addMedia(newMovie, _movieList, movieCount);
+}
+void db::Database::addTvShow(tvshow::Tvshow *newTvShow) {
+    addMedia(newTvShow, _tvList, tvCount);
+}
+void db::Database::addMusic(music::Music *newMusic) {
+    addMedia(newMusic, _musicList, musicCount);
+}
+
+template<typename T1>
+    void db::Database::removeMedia(string& mediaId, T1* mediaList[], int& mediaCount) {
+        bool found = false;
+
+        for (int i = 0; i < mediaCount; ++i) {
+            if (mediaList[i]->getImdbId() == mediaId) { // Check for matching ID
+                delete mediaList[i]; // Delete the media
+                found = true;
+            }
+            if (found && i < mediaCount - 1) {
+                mediaList[i] = mediaList[i + 1]; // Shift up to replace removed media
+            }
+        }
+        if (found) {
+            mediaList[mediaCount - 1] = nullptr; // Clear last pointer
+            --mediaCount; // Decrease the count
+            cout << "Media with ID " << mediaId << " deleted successfully." << endl;
+        } else {
+            cout << "Media with ID " << mediaId << " not found." << endl;
+        }
+    }
+
+
+    void db::Database::removeMovie(string& mediaId) {
+        db::Database::removeMedia(mediaId, _movieList, movieCount);
+    }
+    void db::Database::removeTvshow(string& mediaId) {
+        db::Database::removeMedia(mediaId, _tvList, tvCount);
+    }
+    void db::Database::removeMusic(string& mediaId) {
+        db::Database::removeMedia(mediaId, _musicList, musicCount);
+    }
+
+
+
+
+template<typename T1>
+void db::Database::searchMediaTitle(std::string& mediaTitle, T1* mediaList[], int mediaCount) {
+    bool found = false; // to check if any media was found
+    for (int i = 0; i < mediaCount; ++i) {
+        if (mediaList[i]->getTitle() == mediaTitle) {
             found = true;
-        }
-        if (found && i < movieAmount - 1)
-        {
-            _movieList[i] = _movieList[i + 1]; // shift up by 1 to replace the removed movie, that way we don't leave a "gap"
+            // Print details using a hypothetical print method
+            mediaList[i]->printDetails(); // Assuming each media type has a printDetails method
         }
     }
-    if (found)
-    {
-        _movieList[movieAmount - 1] = nullptr;
-        --movieAmount; // decrease total number of movies by 1
-        cout << "Movie with ID " << imdb_id << " deleted successfully." << endl;
-    }
-    else
-    {
-        cout << "Movie with ID " << imdb_id << " not found." << endl;
+    if (!found) {
+        std::cout << "No media found with the title: " << mediaTitle << std::endl;
     }
 }
 
-void movies::Database::printMovieDetails(Movie *movie) // used in search title and genre
-{
-    cout << endl
-         << "Movie Title: " << movie->getTitle() << endl
-         << "Released in " << movie->getYear() << endl
-         << "Directed by: " << movie->getDirector() << endl
-         << "Genre: " << movie->getGenre() << endl
-         << "IMDB ID: " << movie->getImdbId() << endl
-         << "IMDB rating: " << movie->getRating() << "/10" << endl;
-}
-
-void movies::Database::searchTitle(string &title)
-{
-    bool found = false; // to check if any movie was found
-    for (int i = 0; i < movieAmount; ++i)
-    {
-        if (_movieList[i]->getTitle() == title)
-        {
-            found = true;
-
-            printMovieDetails(_movieList[i]);
-        }
+    void db::Database::searchMovie(string& mediaTitle) {
+        db::Database::searchMediaTitle(mediaTitle, _movieList, movieCount);
     }
-    if (!found)
-    {
-        cout << "No movie found with the title: " << title << endl;
+    void db::Database::searchTvshow(string& mediaTitle) {
+        db::Database::searchMediaTitle(mediaTitle, _tvList, tvCount);
     }
-}
+    void db::Database::searchMusic(string& mediaTitle) {
+        db::Database::searchMediaTitle(mediaTitle, _musicList, musicCount);
+    }
 
-void movies::Database::searchGenre(string &genre)
+template<typename T1>
+void db::Database::searchMediaGenre(std::string& genre, T1* mediaList[], int mediaCount)
 {
     bool found = false;
     for (int i = 0; i < movieAmount; ++i)
@@ -156,38 +330,20 @@ void movies::Database::searchGenre(string &genre)
     }
 }
 
-void movies::Database::displayMovies() // table format
-{
-    if (movieAmount == 0)
-    {
-        cout << "No movies in the database." << endl;
-        return;
-    }
-        cout << left << setw(40) << "Title"
-         << setw(6) << "Year"
-         << setw(20) << "Director"
-         << setw(15) << "Genre"
-         << setw(10) << "IMDB ID"
-         << setw(10) << "Rating" << endl;
 
-    cout << string(98, '-') << endl; // Print a separator line
+ db::Database::~Database() {
+        // Clean up dynamically allocated Movie objects
+        for (int i = 0; i < movieCount; ++i) {
+            delete _movieList[i];
+        }
+        
+        // Clean up dynamically allocated Music objects
+        for (int i = 0; i < musicCount; ++i) {
+            delete _musicList[i];
+        }
 
-    // Print each movie's details
-    for (int i = 0; i < movieAmount; ++i)
-    {
-        cout << left << setw(40) << _movieList[i]->getTitle()
-             << setw(6) << _movieList[i]->getYear()
-             << setw(20) << _movieList[i]->getDirector()
-             << setw(15) << _movieList[i]->getGenre()
-             << setw(10) << _movieList[i]->getImdbId()
-             << setw(10) << _movieList[i]->getRating() << endl;
+        // Clean up dynamically allocated TVShow objects
+        for (int i = 0; i < tvCount; ++i) {
+            delete _tvList[i];
+        }
     }
-}
-
-movies::Database::~Database()
-{
-    for (int i = 0; i < movieAmount; ++i)
-    {
-        delete _movieList[i];
-    }
-}

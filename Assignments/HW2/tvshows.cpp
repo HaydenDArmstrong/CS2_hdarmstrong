@@ -20,11 +20,11 @@ namespace tvshow {
         _tvGenre = tvGenre;
     }
 
-    double Tvshow::getRating() 
+    double Tvshow::getTvRating() 
     { 
         return _tvRating; 
     }
-    void Tvshow::setRating(double rating) 
+    void Tvshow::setTvRating(double rating) 
     { 
         _tvRating = rating; 
     }
@@ -37,4 +37,12 @@ namespace tvshow {
     { 
         _numEpisodes = episodes; 
     }
+
+    // std::string printinfo override {
+    //     // Additional TV show-specific information can be appended here
+    //     std::string info = media::Media::printinfo(mediaId, mediaTitle, mediaYear); // Call to base class function
+    //     info += " (TV Show Specific Details)"; // Add your custom details here
+    //     return info;
+    // }
+   
 }
