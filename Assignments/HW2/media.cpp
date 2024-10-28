@@ -3,12 +3,11 @@ using namespace std;
 
 media::Media::Media(string mediaId, string mediaTitle, int mediaYear)
 {
-    _mediaId= mediaId;
+    _mediaId = mediaId;
     _mediaTitle = mediaTitle;
     _mediaYear = mediaYear;
 }
 
-    
 string media::Media::getId()
 {
     return _mediaId;
@@ -37,4 +36,3 @@ void media::Media::setYear(int mediaYear)
 {
     _mediaYear = mediaYear;
 }
-

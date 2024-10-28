@@ -21,11 +21,6 @@ namespace media
 
         virtual ~Media() {}
 
-        virtual std::string displayInfo() const {
-        return "Media Info";
-    }
-
-    
         string getId();
         void setId(string);
 
@@ -34,13 +29,6 @@ namespace media
 
         int getYear();
         void setYear(int);
+    };
 
-        // string getGenre();
-        // void setGenre(string);
-        // float getRating();
-        // void setRating(float);
-
-        // string getDirector();
-        // void setDirector(string);
-};
 }

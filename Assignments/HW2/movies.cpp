@@ -1,14 +1,15 @@
 #include "movies.h"
+#include <iostream>
+#include <ostream>
 using namespace std;
 
 movies::Movie::Movie(string mediaId, string mediaTitle, int mediaYear, string movGenre, float movRating, string movDirector)
-                  : media::Media(mediaId, mediaTitle, mediaYear)
+    : media::Media(mediaId, mediaTitle, mediaYear)
 {
    _movGenre = movGenre;
    _movRating = movRating;
    _movDirector = movDirector;
 }
-
 
 string movies::Movie::getGenre()
 {
@@ -23,7 +24,6 @@ string movies::Movie::getDirector()
    return _movDirector;
 }
 
-
 void movies::Movie::setGenre(string movGenre)
 {
    _movGenre = movGenre;
@@ -31,7 +31,7 @@ void movies::Movie::setGenre(string movGenre)
 
 void movies::Movie::setRating(float movRating)
 {
-      _movRating = movRating;
+   _movRating = movRating;
 }
 
 void movies::Movie::setDirector(string movDirector)

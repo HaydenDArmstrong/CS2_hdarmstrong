@@ -8,20 +8,13 @@ namespace movies
     class Movie : public media::Media
     {
     private:
-        // std::string _imdbId;
-        // std::string _title;
-        // int _year;
         std::string _movGenre;
         float _movRating;
         std::string _movDirector;
 
     public:
-        Movie(std::string mediaID, std::string mediaTitle, int mediaYear, std::string movGenre, float movRating, std::string movDirector);
+        Movie(std::string mediaId, std::string mediaTitle, int mediaYear, std::string movGenre, float movRating, std::string movDirector);
 
-        std::string displayInfo() const override {
-        return "Movie Info: Title, Genre, Year";
-    }
-    
         std::string getGenre();
         void setGenre(std::string);
 
@@ -30,5 +23,8 @@ namespace movies
 
         std::string getDirector();
         void setDirector(std::string);
+
+        // string printDetails();
+        // virtual void getDetails(Movie);
     };
 }
