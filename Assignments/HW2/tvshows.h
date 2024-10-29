@@ -24,5 +24,12 @@ namespace tvshow
 
         int getNumEpisodes();
         void setNumEpisodes(int numEpisodes);
+
+        void printDetails() const override
+        {
+            Media::printDetails();
+            std::cout << ", Genre: " << _tvGenre << ", Rating: " << _tvRating
+                      << ", Episodes: " << _numEpisodes << std::endl;
+        }
     };
 }

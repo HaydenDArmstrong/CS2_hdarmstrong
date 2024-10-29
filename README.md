@@ -70,5 +70,5 @@ ________________________________________________________________________________
 | Due Date: | 10/14/24 |
 | Status: | in progress |
 | Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/HW2 |
-| Self Grade: | n/a |
-| Notes: | n/a |
+| Self Grade: | 95/100 |
+| Notes: | Dont feel this is ideal code  but accomplishes all media tasks. |

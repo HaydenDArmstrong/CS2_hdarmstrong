@@ -30,7 +30,11 @@ namespace music
         int getTotalPlaytime();
         void setTotalPlaytime(int totalPlaytime);
 
-        string printDetails();
-        void getDetails(Music);
+        void printDetails() const override
+        {
+            Media::printDetails();
+            std::cout << ", Composer: " << _composer << ", Genre: " << _musGenre << ", Number of Tracks: " << _numTracks
+                      << ", Playtime: " << _totalPlaytime << std::endl;
+        }
     };
 }

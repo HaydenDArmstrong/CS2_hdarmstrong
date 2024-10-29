@@ -49,7 +49,7 @@ void db::Database::readInMovie(string filename)
             }
         }
         fin.close();
-        cout << "Movies Loaded " << endl;
+        cout << "Movies loaded... " << endl;
     }
     else
     {
@@ -90,7 +90,7 @@ void db::Database::readInTVShow(string filename)
             }
         }
         fin.close();
-        cout << "Tv Shows Loaded" << endl;
+        cout << "Tv Shows loaded..." << endl;
     }
     else
     {
@@ -132,7 +132,7 @@ void db::Database::readInMusic(string filename)
             }
         }
         fin.close();
-        cout << "Music Loaded" << endl;
+        cout << "Music loaded..." << endl;
     }
     else
     {
@@ -322,8 +322,8 @@ void db::Database::searchMediaTitle(string &mediaTitle, T1 *mediaList[], int med
         if (mediaList[i]->getTitle() == mediaTitle)
         {
             found = true;
-            cout << "Found media maching title" << mediaTitle << endl;
-            // mediaList[i]->printDetails();  IMPLEMENT
+            cout << "Found media maching title: " << mediaTitle << endl;
+            mediaList[i]->printDetails();
         }
     }
     if (!found)
@@ -346,31 +346,124 @@ void db::Database::searchMusic(string &mediaTitle)
 }
 
 // case 5 print media
+// work in progress
 
-template <typename T>
-void db::Database::displayMediaList(T *mediaList[], int mediaCount)
+void db::Database::displayAllMedia()
 {
-    for (int i = 0; i < mediaCount; ++i)
-    {
-        if (mediaList[i])
-        { // Check if the media pointer is not null
-            // cout << mediaList[i]->getMediaInfo() << endl; // Make sure each media class has a method to get its info
-        }
-    }
+
+    displayMediaList(_movieList, movieCount);
+
+    displayMediaList(_musicList, musicCount);
+
+    displayMediaList(_tvList, tvCount);
 }
 
 db::Database::~Database()
 {
     for (int i = 0; i < movieCount; ++i)
     {
+        // cout << "Deleting: " << _movieList[i]->getId() << endl;
         delete _movieList[i];
     }
     for (int i = 0; i < musicCount; ++i)
     {
+        // cout << "Deleting: " << _musicList[i]->getId() << endl;
         delete _musicList[i];
     }
     for (int i = 0; i < tvCount; ++i)
     {
+        // cout << "Deleting: " << _tvList[i]->getId() << endl;
         delete _tvList[i];
     }
+
+    movieCount = tvCount = musicCount = 0;
+}
+
+template <typename T>
+void db::Database::displayMediaList(T **mediaList, int mediaCount)
+{
+    cout << left << setw(15) << "ID"
+         << setw(50) << "Title"
+         << setw(10) << "Year"
+         << endl;
+
+    cout << string(80, '-') << endl;
+
+    for (int i = 0; i < mediaCount; ++i)
+    {
+        if (mediaList[i] != nullptr)
+        {
+            cout << setw(15) << mediaList[i]->getId()
+                 << setw(50) << mediaList[i]->getTitle()
+                 << setw(10) << mediaList[i]->getYear()
+                 << endl;
+        }
+        else
+        {
+            cout << "mediaList[" << i << "] is null." << endl;
+            cout << setw(10) << "N/A"
+                 << setw(25) << "N/A"
+                 << setw(10) << "N/A"
+                 << endl;
+        }
+    }
+}
+
+void db::Database::writeAllMediaToFile(const string &filename)
+{
+    ofstream fout(filename);
+    if (!fout.is_open())
+    {
+        cerr << "File: " << filename << " could not be opened for writing." << endl;
+        return;
+    }
+
+    fout << "Movies:\n";
+    fout << "ID,Title,Year,Genre,Rating,Director\n";
+    for (int i = 0; i < movieCount; ++i)
+    {
+        if (_movieList[i] != nullptr)
+        {
+            fout << _movieList[i]->getId() << ","
+                 << _movieList[i]->getTitle() << ","
+                 << _movieList[i]->getYear() << ","
+                 << _movieList[i]->getGenre() << ","
+                 << _movieList[i]->getRating() << ","
+                 << _movieList[i]->getDirector() << "\n";
+        }
+    }
+
+    fout << "\nTV Shows:\n";
+    fout << "ID,Title,Year,Genre,Rating,Episodes\n";
+    for (int i = 0; i < tvCount; ++i)
+    {
+        if (_tvList[i] != nullptr)
+        {
+            fout << _tvList[i]->getId() << ","
+                 << _tvList[i]->getTitle() << ","
+                 << _tvList[i]->getYear() << ","
+                 << _tvList[i]->getTvGenre() << ","
+                 << _tvList[i]->getTvRating() << ","
+                 << _tvList[i]->getNumEpisodes() << "\n";
+        }
+    }
+
+    fout << "\nMusic:\n";
+    fout << "ID,Title,Year,Composer,Genre,Tracks,Total Playtime\n";
+    for (int i = 0; i < musicCount; ++i)
+    {
+        if (_musicList[i] != nullptr)
+        {
+            fout << _musicList[i]->getId() << ","
+                 << _musicList[i]->getTitle() << ","
+                 << _musicList[i]->getYear() << ","
+                 << _musicList[i]->getComposer() << ","
+                 << _musicList[i]->getMusGenre() << ","
+                 << _musicList[i]->getNumTracks() << ","
+                 << _musicList[i]->getTotalPlaytime() << "\n";
+        }
+    }
+
+    fout.close();
+    cout << "All media data written to " << filename << " successfully." << endl;
 }

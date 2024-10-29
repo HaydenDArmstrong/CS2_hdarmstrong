@@ -29,6 +29,12 @@ namespace media
 
         int getYear();
         void setYear(int);
+
+        virtual void printDetails() const
+        {
+            std::cout << "ID: " << _mediaId << ", Title: " << _mediaTitle
+                      << ", Year: " << _mediaYear;
+        }
     };
 
 }

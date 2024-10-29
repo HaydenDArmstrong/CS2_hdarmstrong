@@ -26,5 +26,13 @@ namespace movies
 
         // string printDetails();
         // virtual void getDetails(Movie);
+
+        void printDetails() const override
+        {
+            Media::printDetails();
+            std::cout << ", Genre: " << _movGenre << ", Rating: " << _movRating
+                      << ", Director: " << _movDirector << std::endl;
+        }
+        
     };
 }

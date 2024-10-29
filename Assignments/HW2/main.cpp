@@ -9,46 +9,33 @@ using namespace std;
 
 void displayMenu()
 {
-    cout << "Media Database Menu:" << endl;
-    cout << "1. Load Media" << endl;
-    cout << "2. Add Media" << endl;
-    cout << "3. Search Media" << endl;
-    cout << "4. Remove Media" << endl;
-    cout << "5. Print All Media" << endl;
-    cout << "6. Write Database to File" << endl;
-    cout << "0. Exit" << endl;
-    cout << "Select an option: ";
+    cout << "\nMedia Database Menu:\n"
+         << "1. Load Media\n"
+         << "2. Add Media\n"
+         << "3. Search Media\n"
+         << "4. Remove Media\n"
+         << "5. Print All Media\n"
+         << "6. Write Database to File\n"
+         << "0. Exit\n"
+         << "Select an option: ";
 }
 
-int main()
+void loadMedia(db::Database &mediaDatabase)
 {
-    db::Database mediaDatabase("MyMediaDB", 1);
-    int choice;
+    mediaDatabase.readInMovie("movies.csv");
+    mediaDatabase.readInTVShow("tvshows.csv");
+    mediaDatabase.readInMusic("music.csv");
+    cout << "Media loaded successfully.";
+}
+
+void addMedia(db::Database &mediaDatabase)
+{
+    string mediaType;
     string mediaId, mediaTitle;
-
-    do
-    {
-        displayMenu();
-        cin >> choice;
-        cin.ignore();
-
-        switch (choice)
-        {
-        case 1:
-        {
-            // read in of each media
-            mediaDatabase.readInMovie("movies.csv");
-            mediaDatabase.readInTVShow("tvshows.csv");
-            mediaDatabase.readInMusic("music.csv");
-            break;
-        }
-        case 2:
-        {
-            string givenmedia;
             cout << "What is your media Type? Ex: movie, tvshow, music" << endl;
-            cin >> givenmedia;
+            cin >> mediaType;
             cin.ignore();
-            if (givenmedia == "movie")
+            if (mediaType == "movie")
             {
                 cout << "Enter Movie ID, Title, Year, Genre, Rating, Director (comma-separated): ";
                 getline(cin, mediaId, ',');
@@ -67,8 +54,9 @@ int main()
                 mediaDatabase.addMovie(newMovie);
                 mediaDatabase.writeMediaToFile("movies.csv", "movie");
             }
-            if (givenmedia == "tvshow")
+            if (mediaType == "tvshow")
             {
+                string mediaId, mediaTitle;
                 cout << "Enter TV Show ID, Title, Year, Genre, Rating, Episodes (comma-separated): ";
                 getline(cin, mediaId, ',');
                 getline(cin, mediaTitle, ',');
@@ -86,7 +74,7 @@ int main()
                 mediaDatabase.addTvShow(newTvShow);
                 mediaDatabase.writeMediaToFile("tvshows.csv", "tvshow");
             }
-            if (givenmedia == "music")
+            if (mediaType == "music")
             {
                 cout << "Enter Music ID, Title, Year, Composer, Genre, Tracks, Playtime (comma-separated): ";
                 getline(cin, mediaId, ',');
@@ -105,88 +93,112 @@ int main()
                 mediaDatabase.addMusic(newMusic);
                 mediaDatabase.writeMediaToFile("music.csv", "music");
             }
+}
+
+void searchMedia(db::Database &mediaDatabase)
+{
+    string mediaType, mediaTitle;
+    cout << "Enter media type (movie, tvshow, music): ";
+    cin >> mediaType;
+    cin.ignore();
+    cout << "Enter the title: ";
+    getline(cin, mediaTitle);
+
+    if (mediaType == "movie")
+    {
+        mediaDatabase.searchMovie(mediaTitle);
+    }
+    else if (mediaType == "tvshow")
+    {
+        mediaDatabase.searchTvshow(mediaTitle);
+    }
+    else if (mediaType == "music")
+    {
+        mediaDatabase.searchMusic(mediaTitle);
+    }
+}
+
+void removeMedia(db::Database &mediaDatabase)
+{
+    string mediaType, mediaId;
+    cout << "Enter media type (movie, tvshow, music): ";
+    cin >> mediaType;
+    cin.ignore();
+    cout << "Enter Media ID to remove: ";
+    getline(cin, mediaId);
+
+    if (mediaType == "movie")
+    {
+        mediaDatabase.removeMovie(mediaId);
+        mediaDatabase.writeMediaToFile("movies.csv", "movie");
+    }
+    else if (mediaType == "tvshow")
+    {
+        mediaDatabase.removeTvshow(mediaId);
+        mediaDatabase.writeMediaToFile("tvshows.csv", "tvshow");
+    }
+    else if (mediaType == "music")
+    {
+        mediaDatabase.removeMusic(mediaId);
+        mediaDatabase.writeMediaToFile("music.csv", "music");
+    }
+    cout << mediaType << " removed successfully.\n";
+}
+
+int main()
+{
+    db::Database mediaDatabase("MyMediaDB", 1);
+    int choice;
+
+    do
+    {
+        displayMenu();
+        cin >> choice;
+        cin.ignore();
+
+        switch (choice)
+        {
+        case 1:
+        {
+            loadMedia(mediaDatabase);
+            break;
+        }
+        case 2:
+        {
+            addMedia(mediaDatabase);
             break;
         }
         case 3:
         {
-            string givenmedia;
-            cout << "What is your media Type? Ex: movie, tvshow, music" << endl;
-            cin >> givenmedia;
-            cin.ignore();
-            if (givenmedia == "movie")
-            {
-                cout << "What is the title of media?" << endl;
-                getline(cin, mediaTitle);
-                mediaDatabase.searchMovie(mediaTitle);
-            }
-            if (givenmedia == "tvshow")
-            {
-                cout << "What is the title of media?" << endl;
-                getline(cin, mediaTitle);
-                mediaDatabase.searchTvshow(mediaTitle);
-            }
-            if (givenmedia == "music")
-            {
-                cout << "What is the title of media?" << endl;
-                getline(cin, mediaTitle);
-                mediaDatabase.searchMusic(mediaTitle);
-            }
+            searchMedia(mediaDatabase);
             break;
         }
         case 4:
         {
-            string givenmedia;
-            cout << "What is your media Type? Ex: movie, tvshow, music" << endl;
-            cin >> givenmedia;
-            cin.ignore();
-            if (givenmedia == "movie")
-            {
-                cout << "Enter Movie ID to remove: ";
-                getline(cin, mediaId);
-                mediaDatabase.removeMovie(mediaId);
-                mediaDatabase.writeMediaToFile("movies.csv", "movie");
-            }
-            if (givenmedia == "tvshow")
-            {
-                cout << "Enter Tv Show ID to remove: ";
-                getline(cin, mediaId);
-                mediaDatabase.removeTvshow(mediaId);
-                mediaDatabase.writeMediaToFile("tvshows.csv", "tvshow");
-            }
-            if (givenmedia == "music")
-            {
-                cout << "Enter Media ID to remove: ";
-                getline(cin, mediaId);
-                mediaDatabase.removeMusic(mediaId);
-                mediaDatabase.writeMediaToFile("music.csv", "music");
-            }
+            removeMedia(mediaDatabase);
             break;
         }
         case 5:
         {
-            cout << "Movies:" << endl;
-            mediaDatabase.readInMovie("movies.csv");
-            cout << "TV Shows:" << endl;
-            mediaDatabase.readInTVShow("tvshows.csv");
-            cout << "Music:" << endl;
-            mediaDatabase.readInMusic("music.csv");
+            mediaDatabase.displayAllMedia();
             break;
         }
         case 6:
         {
-            // write media to file
+            cout << "Database written to file.\n";
+            mediaDatabase.writeAllMediaToFile("output.csv");
             break;
-        }
+        } // implement
         case 0:
         {
-            cout << "Exiting program." << endl;
+            cout << "Deallocating media..." << endl;
+            mediaDatabase.~Database();
+            cout << "Exiting program.\n";
             break;
         }
         default:
-        {
-            cout << "Invalid choice, please try again." << endl;
+            cout << "Invalid choice, please try again.\n";
             break;
-        }
         }
     } while (choice != 0);
 

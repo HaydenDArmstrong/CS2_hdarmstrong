@@ -2,6 +2,7 @@
 #include "movies.h"  // Movie class
 #include "music.h"   // Music class
 #include "tvshows.h" // TVShows class
+#include <iomanip>
 
 using namespace std;
 
@@ -67,8 +68,14 @@ namespace db
         void searchTvshow(string &mediaTitle);
         void searchMusic(string &mediaTitle);
 
-        template <typename T1>
-        void displayMediaList(T1 *mediaList[], int mediaCount);
+        void displayAllMedia();
+
+    // Templated display function declaration
+    template <typename T>
+    void displayMediaList(T** mediaList, int count);
+        
+    void writeAllMediaToFile(const string &filename);
+
     };
 
 }
