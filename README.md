@@ -46,6 +46,17 @@ ________________________________________________________________________________
 | Self Grade: | 100/100 |
 | Notes: | Functions Correctly|
 
+## Lab #4
+| Name | Value |
+| --- | --- |
+| Name: | Doubly Linked List Lab |
+| Description: | "Doubly LinkedList ; Lab 4" |
+| Due Date: | 11/10/24 |
+| Status: | complete |
+| Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Labs/Lab4 |
+| Self Grade: | 100/100 |
+| Notes: | Functions Correctly|
+
 
 _______________________________________________________________________________________________________________
 
