@@ -3,6 +3,8 @@
 
 using namespace std;
 
+void quickSort(int[], int, int);
+int partition(int[], int, int);
 void mergeSort(int[], int);
 void merge(int[], int);
 void insertionSort(int[], int);
@@ -22,8 +24,9 @@ int main (int argc, char* argv[])
     // bubbleSort(numbers, arrSize);
     //selectionSort(numbers,arrSize);
     //insertionSort(numbers,arrSize);
+     quickSort(numbers, arrSize - 1);
 
-    mergeSort(numbers, arrSize);
+    //mergeSort(numbers, arrSize);
 
     cout << "Sorted: " << endl;
     printArray(numbers,arrSize);
@@ -38,6 +41,34 @@ void printArray(int numbers[], int arrSize)
         cout << numbers[i] << " ";
     }
     cout << endl;
+}
+
+void quickSort(int numbers[], int begin, int end)
+{
+    if (begin >= end) return;
+
+    int partIdx = partition(numbers, begin, end);
+    cout << "Array: ";
+    printArray(numbers, end+1);
+    quickSort(numbers, begin, partIdx - 1);
+    quickSort(numbers, partIdx + 1, end);
+
+}
+
+int partition(int numbers[], int begin, int end)
+{
+    int pivot = numbers[end];
+    int i = begin - 1;
+
+    for (int j = begin; j < end; j++)
+    {
+        if (numbers[j] <= pivot)
+        {
+            i++;
+            swap(numbers[i], numbers[j]);
+        }
+    }
+    swap(numbers[i+1], numbers[end]);
 }
 
 void bubbleSort(int numbers[], int arrSize)
