@@ -57,6 +57,17 @@ ________________________________________________________________________________
 | Self Grade: | 100/100 |
 | Notes: | Functions Correctly|
 
+## Lab #5
+| Name | Value |
+| --- | --- |
+| Name: | BST |
+| Description: | "BST ; Lab 4" |
+| Due Date: | 11/21/24 |
+| Status: | complete |
+| Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Labs/Lab5 |
+| Self Grade: | 100/100 |
+| Notes: | Functions Correctly|
+
 
 _______________________________________________________________________________________________________________
 
