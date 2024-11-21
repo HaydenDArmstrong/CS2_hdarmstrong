@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <cmath>
+#include <cassert> 
 #include "stack.h"
 
 using namespace std;
@@ -15,21 +16,19 @@ double evaluateRPN(string expression)
 
     while (ss >> token)
     {
-        // Try to convert the token to a double
         try
         {
-            double number = stod(token);  // Try converting the token to a double
-            stack.push(number);           // Push number to stack if successful
+            double number = stod(token);
+            stack.push(number);
         }
-        catch (const invalid_argument&)
+        catch (const invalid_argument &)
         {
-            // If it's not a number, handle operators
             if (token == "+" || token == "-" || token == "*" || token == "/")
             {
                 if (stack.size() < 2)
                 {
                     cerr << "Error: Invalid RPN expression." << endl;
-                    return NAN;
+                    return NAN   ;
                 }
                 double b = stack.pop();
                 double a = stack.pop();
@@ -67,37 +66,43 @@ double evaluateRPN(string expression)
     return stack.pop();
 }
 
-// Test cases for evaluateRPN
+// Test cases for evaluateRPN using assertions
 void test()
 {
-    string test1 = "3 4 + 5 6 - *";
-    string test2 = "7 5 + 1 42 / +";
-    string test3 = "2 5 + 2 - 8 9 + +";
+    // Test 1: Standard RPN expression
+    string test1 = "3 4 + ";
+    assert(abs(evaluateRPN(test1)) == 7);
 
-    cout << test1 << " = " << evaluateRPN(test1) << endl;
-    cout << test2 << " = " << evaluateRPN(test2) << endl;
-    cout << test3 << " = " << evaluateRPN(test3) << endl;
+    string test2 = "10 5 / 2 -";
+    assert(abs(evaluateRPN(test2)) == 0);
+
+    string test3 = "2 3 + 5 *";
+    assert(abs(evaluateRPN(test3)) == 25);
+
+    // // Test 4: Division by zero
+     string test4 = "5 0 /";
+     assert(std::isnan(evaluateRPN(test4)));
+
+    // // Test 5: Invalid token
+     string test5 = "5 2 @";
+     assert(std::isnan(evaluateRPN(test5)));
+
+    cout << "All test cases passed." << endl;
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    if (argc == 3 && string(argv[1]) == "-p")
-    {
-        string expression = argv[2];
-        double result = evaluateRPN(expression);
-        cout << expression << " = " << result << endl;
-    }
-    else
-    {
+   
         string expression;
         cout << "Enter an RPN expression: ";
         getline(cin, expression);
         double result = evaluateRPN(expression);
         cout << expression << " = " << result << endl;
+    if(argc >= 2 && (string)argv[1] == "test")
+    {
+        test();
+        return 0;
     }
-
-    // Run test cases
-    test();
 
     return 0;
 }

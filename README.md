@@ -83,3 +83,14 @@ ________________________________________________________________________________
 | Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/HW2 |
 | Self Grade: | 95/100 |
 | Notes: | Dont feel this is ideal code  but accomplishes all media tasks. |
+
+## Assignment #2
+| Name | Value |
+| --- | --- |
+| Name: | Homework 3 |
+| Description: | "Reverse Polish Notation" |
+| Due Date: | 11/29/24 |
+| Status: | complete |
+| Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/HW2 |
+| Self Grade: | 99/100 |
+| Notes: | finished |
