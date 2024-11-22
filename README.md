@@ -61,8 +61,8 @@ ________________________________________________________________________________
 | Name | Value |
 | --- | --- |
 | Name: | BST |
-| Description: | "BST ; Lab 4" |
-| Due Date: | 11/21/24 |
+| Description: | "Binary Search Tree, Lab 5" |
+| Due Date: | 12/9/24 |
 | Status: | complete |
 | Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Labs/Lab5 |
 | Self Grade: | 100/100 |
@@ -95,7 +95,7 @@ ________________________________________________________________________________
 | Self Grade: | 95/100 |
 | Notes: | Dont feel this is ideal code  but accomplishes all media tasks. |
 
-## Assignment #2
+## Assignment #3
 | Name | Value |
 | --- | --- |
 | Name: | Homework 3 |
@@ -105,3 +105,27 @@ ________________________________________________________________________________
 | Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/HW3 |
 | Self Grade: | 99/100 |
 | Notes: | finished |
+
+## Assignment #4
+| Name | Value |
+| --- | --- |
+| Name: | Homework 4 |
+| Description: | "work Counter" |
+| Due Date: | 12/9/24 |
+| Status: | in progress |
+| Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/HW4 |
+| Self Grade: | n/a |
+| Notes: | n/a |
+
+# Final
+
+## Final Project
+| Name | Value |
+| --- | --- |
+| Name: | Final |
+| Description: | "Dungeon Game" |
+| Due Date: | 12/9/24 |
+| Status: | in progress |
+| Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/Final |
+| Self Grade: | n/a |
+| Notes: | n/a |

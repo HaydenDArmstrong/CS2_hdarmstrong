@@ -71,6 +71,7 @@ void test()
     streambuf* backup = cout.rdbuf();
     cout.rdbuf(buffer.rdbuf());
     myTree->inOrder();
+
     string test1 = buffer.str();
     buffer.str(string());
     
@@ -92,7 +93,6 @@ void test()
     string test3 = buffer.str();
     buffer.str(string());
     cout.rdbuf(backup);
-
 
     assert(test1 == "8 25 27 30 37 39 67 74 87 95 ");
     assert(test2 == "12 31 32 35 41 51 59 77 80 83 ");

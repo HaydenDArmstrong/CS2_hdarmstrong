@@ -5,7 +5,7 @@
 template <typename T1>
 class BST {
 private:
-    Node<T1> *_root;
+    Node<T1> *_root = nullptr;
     Node<T1> *insertNode(Node<T1> *, T1);
     void inOrderPrint(Node<T1> *);
     Node<T1> *searchData(Node<T1> *, T1);
@@ -20,6 +20,7 @@ public:
     void remove(T1);
     ~BST();
 };
+
 
 // Destructor, should call destroyTree, passing _root to that method
 template <typename T1>
@@ -130,7 +131,6 @@ void BST<T1>::inOrderPrint(Node<T1> *root) {
 template <typename T1>
 void BST<T1>::inOrder() {
     inOrderPrint(_root);
-    std::cout << std::endl;
 }
 
 // Give some data and a node, recursively walk the tree until you get to a nullptr and store the value there.
