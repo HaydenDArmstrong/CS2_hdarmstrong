@@ -16,7 +16,7 @@ int main()
     std::cout << "Welcome to the Dungeon!" << std::endl;
 
     std::cout << "what difficulty would you like?";
-    std::cout << "\nOptions:\n1. Easy \n2. Normal \n3. Hard \n4. Hardest" << std::endl;
+    std::cout << "\nOptions:\n1. Easy \n2. Normal \n3. Hard \n4. Expert" << std::endl;
     std::cin >> diffChoice;
     switch (diffChoice)
     {
