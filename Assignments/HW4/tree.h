@@ -26,14 +26,21 @@ class BST
 template <class T1>
 BST<T1>::~BST()
 {
-    delete _root;
+    while (head)
+    {
+        Room* temp = head;
+        head = head->getNextRoom();
+        delete temp;
+    }
 }
 
 // Public method that takes in some data and passes that into the removeData method. Don't forget to update _root as you may end up deleting the original root.
 template <class T1>
 void BST<T1>::remove(T1 data)
 {
+    while (_root) {
     _root = removeData(_root, data);
+    }
 }
 
 // Private method to recursively walk the tree until the data is found.
