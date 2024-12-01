@@ -26,11 +26,25 @@ class BST
 template <class T1>
 BST<T1>::~BST()
 {
-    while (head)
-    {
-        Room* temp = head;
-        head = head->getNextRoom();
-        delete temp;
+
+    if (_root != nullptr) {
+        // Delete the left subtree
+        if (_root->getLeft() != nullptr) {
+            Node<T1>* leftSubtree = _root->getLeft();
+            _root->setLeft(nullptr); 
+            delete leftSubtree;  // Recursively delete the left subtree
+        }
+
+        // Delete the right subtree
+        if (_root->getRight() != nullptr) {
+            Node<T1>* rightSubtree = _root->getRight();
+            _root->setRight(nullptr); 
+            delete rightSubtree;  // Recursively delete the right subtree
+        }
+
+        //  delete the root itself
+        delete _root;
+        _root = nullptr;  // Set the root to nullptr after deletion
     }
 }
 

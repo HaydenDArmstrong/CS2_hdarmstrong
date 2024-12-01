@@ -18,7 +18,7 @@ int main() {
 
     // Add the assignments from homework 5.2 and onwards with a score of 98%
     std::vector<Homework> additional_assignments = {
-        { 9, 9}, { 9, 10}, {8.39, 8.39}, {6, 6}, { 14, 16}
+        { 9, 9}, { 9, 10}, {8.39, 8.39}, {6, 6}, { 15, 16}
     };
 
     // Combine the two lists of assignments

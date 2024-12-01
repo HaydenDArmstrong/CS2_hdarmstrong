@@ -1,14 +1,15 @@
 #pragma once
 #include "room.h"
 
-class Dungeon {
+class Dungeon
+{
 private:
-    Room* firstRoom;
+    Room *firstRoom;
 
 public:
     Dungeon();
     ~Dungeon();
-    
+
     void createDungeon();
-    Room* getFirstRoom();
+    Room *getFirstRoom();
 };
