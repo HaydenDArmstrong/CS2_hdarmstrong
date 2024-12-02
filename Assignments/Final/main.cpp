@@ -12,8 +12,9 @@ int main()
     std::string weapon;
     int playerHealth;
     int diffChoice;
-
+    std::cout << " ---------------------------------------------" << std::endl;
     std::cout << "Welcome to the Dungeon!" << std::endl;
+    std::cout << " ---------------------------------------------" << std::endl;
 
     std::cout << "what difficulty would you like?";
     std::cout << "\nOptions:\n1. Easy \n2. Normal \n3. Hard \n4. Expert" << std::endl;
@@ -91,7 +92,15 @@ int main()
                     std::cout << std::endl;
                     if (roomEnemy->getHealth() > 0)
                     {
-                        roomEnemy->attack(&player);
+                        if (roomEnemy->getName() == "Wall")
+                        {
+                            std::cout << "The wall crumbles.." << std::endl;
+                        }
+                        else
+                        {
+                            roomEnemy->attack(&player);
+                        }
+
                     }
                     break;
                 case 2:
@@ -132,6 +141,17 @@ int main()
 
                     if (fleeChoice == 'y' || fleeChoice == 'Y')
                     {
+                        if (roomEnemy->getName() == "Wall")
+                        {
+                            std::cout << std::endl;
+                            std::cout << "With no other path, and the fear of the wall overpowering you, " << playerName << " runs out of the dungeon.\n"
+                            "Your head is filled with hopes of a comfortable cottage where you can rest.\n"
+                            "But suddenly, you trip on a stone on your ascent, and bleed out. Nobody is there to help as mice scurry around you." << std::endl;
+                            player.setHealth(0);
+                            break;
+                        }
+                        else
+                        {
                         // Random chance for the player to be killed
                         int fleeChance = 1 + std::rand() % 21; // Random number between 0 and 20
                         if (fleeChance < roomEnemy->getfleeChance())
@@ -148,6 +168,7 @@ int main()
                             roomEnemy = nullptr; // Remove the enemy
                             break;
                         }
+                        }
                     }
                     else
                     {
@@ -161,7 +182,7 @@ int main()
 
                 if (roomEnemy != nullptr && roomEnemy->getHealth() <= 0)
                 {
-                    std::cout << "Enemy defeated!" << std::endl;
+                    std::cout << roomEnemy->getName() << " defeated!" << std::endl;
                     currentRoom->removeEnemy();
                     roomEnemy = nullptr;
                 }
@@ -182,7 +203,7 @@ int main()
         char proceed;
         std::cin >> proceed;
 
-        if (proceed != 'n' || proceed != 'N') // failsafe incase user spams, doesnt quit
+        if (proceed != 'n' && proceed != 'N') // failsafe incase user spams, doesnt quit
         {
             currentRoom = currentRoom->getNextRoom();
 

@@ -101,7 +101,7 @@ ________________________________________________________________________________
 | Name: | Homework 3 |
 | Description: | "Reverse Polish Notation" |
 | Due Date: | 11/29/24 |
-| Status: | complete |
+| Status: | Complete |
 | Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/HW3 |
 | Self Grade: | 99/100 |
 | Notes: | finished |
@@ -110,12 +110,12 @@ ________________________________________________________________________________
 | Name | Value |
 | --- | --- |
 | Name: | Homework 4 |
-| Description: | "work Counter" |
+| Description: | "Word Counter" |
 | Due Date: | 12/9/24 |
-| Status: | in progress |
+| Status: | Complete |
 | Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/HW4 |
-| Self Grade: | n/a |
-| Notes: | n/a |
+| Self Grade: | 90/100 |
+| Notes: | finished |
 
 # Final
 
@@ -125,7 +125,7 @@ ________________________________________________________________________________
 | Name: | Final |
 | Description: | "Dungeon Game" |
 | Due Date: | 12/9/24 |
-| Status: | in progress |
+| Status: | Complete |
 | Location: | https://github.com/HaydenDArmstrong/CS2_hdarmstrong/tree/main/Assignments/Final |
-| Self Grade: | n/a |
-| Notes: | n/a |
+| Self Grade: | 94/100 |
+| Notes: | Finished but more could be added |

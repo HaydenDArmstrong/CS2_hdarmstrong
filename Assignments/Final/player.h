@@ -31,4 +31,6 @@ public:
 
     // Setter for health (in case you want to set health)
     void setHealth(int newHealth);
+
+    void silentHealthChange(int newHealth);
 };
