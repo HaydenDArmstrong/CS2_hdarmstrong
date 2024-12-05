@@ -43,6 +43,12 @@ int main()
     std::cout << "What is your weapon? ";
     std::cin >> weapon;
 
+    std::cout << std::endl;
+    std::cout << "While adventuring, " << playerName << " discovers a dungeon hidden underneath moss. \n"
+              << playerName << " is already miles outside of the safety of the town. Deep in the forest, this artifical structure feels unnervingly out of place\n"
+                               "In a split second decision, "
+              << playerName << " puts aside their fear and reservations. " << playerName << " starts their plunge, in hopes of something great potentially awaiting them." << std::endl;
+
     // Create player
     Player player(playerName, playerHealth);
 
@@ -84,10 +90,18 @@ int main()
                 int choice;
                 std::cin >> choice;
 
+                while (std::cin.fail()) // if a number is inot inputted
+                {
+                    std::cout << "Error. Please enter your valid number choice:";
+                    std::cin.clear();
+                    std::cin.ignore(256, '\n');
+                    std::cin >> choice;
+                }
+
                 switch (choice)
                 {
                 case 1: // Attack
-                    std::cout << "You attack the " << roomEnemy->getName() << " with your " << weapon << "." << std::endl;
+                    std::cout << playerName << " attacks the " << roomEnemy->getName() << " with their " << weapon << "." << std::endl;
                     player.attack(roomEnemy);
                     std::cout << std::endl;
                     if (roomEnemy->getHealth() > 0)
@@ -100,11 +114,10 @@ int main()
                         {
                             roomEnemy->attack(&player);
                         }
-
                     }
                     break;
                 case 2:
-                    std::cout << "Your Inventory: \n";
+                    std::cout << playerName << "'s Inventory: \n";
                     // Display the player's inventory
                     for (int i = 0; i < player.getInventoryCount(); ++i)
                     {
@@ -145,34 +158,35 @@ int main()
                         {
                             std::cout << std::endl;
                             std::cout << "With no other path, and the fear of the wall overpowering you, " << playerName << " runs out of the dungeon.\n"
-                            "Your head is filled with hopes of a comfortable cottage where you can rest.\n"
-                            "But suddenly, you trip on a stone on your ascent, and bleed out. Nobody is there to help as mice scurry around you." << std::endl;
+                                      << playerName << "'s head is filled with hopes of a comfortable cottage where you can rest.\n"
+                                                       "But suddenly, you trip on a stone on your ascent, and bleed out. Nobody is there to help as mice scurry around you."
+                                      << std::endl;
                             player.setHealth(0);
                             break;
                         }
                         else
                         {
-                        // Random chance for the player to be killed
-                        int fleeChance = 1 + std::rand() % 21; // Random number between 0 and 20
-                        if (fleeChance < roomEnemy->getfleeChance())
-                        { // chance of dying according to enemyFleeChance. if flee chance is 20, you cannot flee
-                            std::cout << "As you attempt to flee, the " << roomEnemy->getName() << " strikes and kills you. You bleed out and die." << std::endl;
-                            std::cout << "(your survival roll was " << fleeChance << ". you cannot escape from " << roomEnemy->getName() << " with less than a " << roomEnemy->getfleeChance() << ".)" << std::endl;
-                            player.setHealth(0); // Player dies
-                            break;
-                        }
-                        else
-                        {
-                            std::cout << "(your survival roll was " << fleeChance << ". you escaped from " << roomEnemy->getName() << " by rolling more or equal to " << roomEnemy->getfleeChance() << ".)" << std::endl;
-                            std::cout << "You successfully flee from the enemy!" << std::endl;
-                            roomEnemy = nullptr; // Remove the enemy
-                            break;
-                        }
+                            // Random chance for the player to be killed
+                            int fleeChance = 1 + std::rand() % 21; // Random number between 0 and 20
+                            if (fleeChance < roomEnemy->getfleeChance())
+                            { // chance of dying according to enemyFleeChance. if flee chance is 20, you cannot flee
+                                std::cout << "As you attempt to flee, the " << roomEnemy->getName() << " strikes and kills you. " << playerName << " bleeds out and dies." << std::endl;
+                                std::cout << "(Your survival roll was " << fleeChance << ". " << playerName << " cannot escape from " << roomEnemy->getName() << " with less than a " << roomEnemy->getfleeChance() << ".)" << std::endl;
+                                player.setHealth(0); // Player dies
+                                break;
+                            }
+                            else
+                            {
+                                std::cout << "(your survival roll was " << fleeChance << ". " << playerName << " escaped from " << roomEnemy->getName() << " by rolling more or equal to " << roomEnemy->getfleeChance() << ".)" << std::endl;
+                                std::cout << playerName << " successfully fleed from the enemy!" << std::endl;
+                                roomEnemy = nullptr; // Remove the enemy
+                                break;
+                            }
                         }
                     }
                     else
                     {
-                        std::cout << "You decide not to flee." << std::endl;
+                        std::cout << playerName << " decided not to flee." << std::endl;
                         break;
                     }
                 default:
@@ -206,18 +220,19 @@ int main()
         if (proceed != 'n' && proceed != 'N') // failsafe incase user spams, doesnt quit
         {
             currentRoom = currentRoom->getNextRoom();
+            std::cout << "\033[2J\033[1;1H";
 
             // Check for final room (victory condition)
             if (currentRoom == nullptr)
             {
-                std::cout << "You scale back up the dungeon, now daydreaming of returning to the city and its merchants, and receiving unimaginable wealth." << std::endl;
+                std::cout << playerName << " scales back up the dungeon, now daydreaming of returning to the city and its merchants, and receiving unimaginable wealth." << std::endl;
                 std::cout << "Congratulations! You have completed the dungeon!" << std::endl;
                 gameOver = true;
             }
         }
         else
         {
-            std::cout << "You quickly run out of the dungeon with tears in your eyes. Your head is filled with hopes of a comfortable cottage where you can rest." << std::endl;
+            std::cout << playerName << " quickly runs out of the dungeon with tears in their eyes. " << playerName << "'s head is filled with hopes of a comfortable cottage where they can rest." << std::endl;
             gameOver = true;
         }
     }
