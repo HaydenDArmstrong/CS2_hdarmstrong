@@ -72,7 +72,7 @@ int main()
     while (!gameOver && currentRoom != nullptr)
     {
         // Display room description
-        std::cout << "\n------- " << currentRoom->getDescription() << " --------------" << std::endl;
+        std::cout << "\n--------- " << currentRoom->getDescription() << " --------------" << std::endl;
         std::cout << currentRoom->getroomFlavor();
         std::cout << " ---------------------------------------------" << std::endl;
 
@@ -93,10 +93,13 @@ int main()
             // Combat logic
             while (roomEnemy != nullptr && player.getHealth() > 0)
             {
-                std::cout << std::endl;
-                std::cout << "-" << playerName << " has " << player.getHealth() << " health and " << player.getInventoryCount() << " item(s) in inventory." << "-";
-                std::cout << "\nOptions:\n1. Attack\n2. inventory \n3. Run" << std::endl;
                 int choice;
+                std::cout << " ---------------------------------------------" << std::endl;
+                std::cout << "" << playerName << " has " << player.getHealth() << " health and " << player.getInventoryCount() << " item(s) in inventory." << "" << std::endl;
+                std::cout << roomEnemy->getName() << " has " << roomEnemy->getHealth() << " Health." << std::endl;
+                std::cout << "\nOptions:\n1. Attack\n2. inventory \n3. Run" << std::endl;
+                std::cout << " ---------------------------------------------" << std::endl;
+                std::cout << "Choice: ";
                 std::cin >> choice;
 
                 while (std::cin.fail()) // if a number is inot inputted
@@ -110,7 +113,9 @@ int main()
                 switch (choice)
                 {
                 case 1: // Attack
+                    std::cout << std::endl;
                     std::cout << playerName << " attacks the " << roomEnemy->getName() << " with their " << weapon << "." << std::endl;
+                    std::cout << std::endl;
                     player.attack(roomEnemy);
                     std::cout << std::endl;
                     if (roomEnemy->getHealth() > 0)
@@ -139,7 +144,6 @@ int main()
 
                     std::cout << "Enter the number of the item you want to use (or 0 to go back): ";
                     int itemChoice;
-                    std::cin >> itemChoice;
                     std::cin >> itemChoice;
                     while (std::cin.fail())
                     {
@@ -234,10 +238,19 @@ int main()
         char proceed;
         std::cin >> proceed;
 
-        if (proceed != 'n' && proceed != 'N') // failsafe incase user spams, doesnt quit
+        while (std::cin.fail() || (proceed != 'y' && proceed != 'n'))
+        {
+            std::cin.clear();
+            std::cin.ignore(256, '\n');
+            std::cout << "Invalid choice. Please respond with either 'y' for yes or 'n' for no: ";
+            std::cin >> proceed;
+        }
+
+        if (proceed != 'n' && proceed != 'N') // old failsafe, but doesnt matter because of std::cin.fail(). either y or not n
         {
             currentRoom = currentRoom->getNextRoom();
-            std::cout << "\033[2J\033[1;1H";
+            // std::cout << "\033[2J\033[H";
+            system("clear");
 
             // Check for final room (victory condition)
             if (currentRoom == nullptr)
