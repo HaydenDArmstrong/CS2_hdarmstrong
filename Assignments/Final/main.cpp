@@ -19,6 +19,15 @@ int main()
     std::cout << "what difficulty would you like?";
     std::cout << "\nOptions:\n1. Easy \n2. Normal \n3. Hard \n4. Expert" << std::endl;
     std::cin >> diffChoice;
+
+    while (std::cin.fail() || diffChoice < 1 || diffChoice > 4)
+    {
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
+        std::cout << "Invalid difficulty. Please choose 1-4: ";
+        std::cin >> diffChoice;
+    }
+
     switch (diffChoice)
     {
     case 1:
@@ -131,6 +140,14 @@ int main()
                     std::cout << "Enter the number of the item you want to use (or 0 to go back): ";
                     int itemChoice;
                     std::cin >> itemChoice;
+                    std::cin >> itemChoice;
+                    while (std::cin.fail())
+                    {
+                        std::cin.clear();
+                        std::cin.ignore(256, '\n');
+                        std::cout << "Invalid input. Enter the number of the item: ";
+                        std::cin >> itemChoice;
+                    }
 
                     if (itemChoice > 0 && itemChoice <= player.getInventoryCount() &&
                         player.getItemFromInventory(itemChoice - 1) != nullptr)

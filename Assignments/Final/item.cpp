@@ -41,7 +41,7 @@ void Item::use(Player *player)
     else
     { // mysterious liquid
         player->setHealth(currentHealth + effect);
-        std::cout << name << " damaged you!" << "you lost " << effect << " health." << std::endl;
+        std::cout << name << " damaged you!" << " you lost " << effect << " health." << std::endl;
     }
 }
 

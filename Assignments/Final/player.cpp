@@ -9,7 +9,7 @@ Player::Player(std::string playerName, int startHealth)
     health = startHealth;
     maxHealth = startHealth;
     inventoryCount = 0;
-    for (int i = 0; i < 4; ++i)
+    for (int i = 0; i < 10; ++i)
     {
         inventory[i] = nullptr; // Set all inventory slots to nullptr
     }

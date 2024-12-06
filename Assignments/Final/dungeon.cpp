@@ -10,10 +10,21 @@ Dungeon::Dungeon()
 
 Dungeon::~Dungeon()
 {
-    Room *current = firstRoom;
+   Room *current = firstRoom;
     while (current != nullptr)
     {
         Room *next = current->getNextRoom();
+        
+        // Delete room's enemy if exists
+        Enemy *roomEnemy = current->getEnemy();
+        if (roomEnemy != nullptr)
+            delete roomEnemy;
+        
+        // Delete room's item if exists
+        Item *roomItem = current->getItem();
+        if (roomItem != nullptr)
+            delete roomItem;
+        
         delete current;
         current = next;
     }
